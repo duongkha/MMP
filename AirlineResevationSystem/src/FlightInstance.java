@@ -12,16 +12,15 @@ public class FlightInstance {
 	List<Ticket> tickets;
 	
 	public FlightInstance(Flight flight,String id,LocalDate date) {
-		if(flight != null) {
-			this.flight = flight;
-			this.flight.addFlightInstance(this);
-		}
 		this.id = id;
 		this.date = date;
 		crews = new ArrayList<String>();
 		pilots = new ArrayList<String>();
 		tickets = new ArrayList<Ticket>();
 		reservations = new ArrayList<Reservation>();
+		if(flight != null) {
+			this.flight = flight;
+		}
 	}
 	public List<Reservation> getReservations() {
 		return reservations;

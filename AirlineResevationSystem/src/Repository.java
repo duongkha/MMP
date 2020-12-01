@@ -1,5 +1,5 @@
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +8,7 @@ public class Repository {
 	static List<Airport> airports;
 	static List<Airline> airlines;
 	static List<Flight> flights;
+	static List<FlightInstance> flightInstances;
 	public Repository() {
 		Initialize();
 	}
@@ -15,6 +16,7 @@ public class Repository {
 		InitAirports();
 		InitAirlines();
 		InitFlights();
+		InitFlightInstances();
 	}
 	
 	private void InitAirports() {
@@ -48,6 +50,55 @@ public class Repository {
 		flights.add(flight2);
 		
 	}
+	
+	private void InitFlightInstances() {
+		flightInstances = new ArrayList<FlightInstance>();
+		String[] crews = {"Mary", "Lisa"};
+		String[] pilots = {"Kha Nguyen","Anuj","Munkhdalai"};
+		var flight1 = flights.get(0);
+		var instance1 = new FlightInstance(flight1, "1111", LocalDate.of(2020, 12, 1));
+		instance1.setCrews(List.of(crews));
+		instance1.setPilots(List.of(pilots));
+		flight1.addFlightInstance(instance1);
+		
+		var instance2 = new FlightInstance(flight1, "1112", LocalDate.of(2020, 12, 2));
+		instance2.setCrews(List.of(crews));
+		instance2.setPilots(List.of(pilots));
+		flight1.addFlightInstance(instance2);
+		var instance3 = new FlightInstance(flight1, "1113", LocalDate.of(2020, 12, 3));
+		instance3.setCrews(List.of(crews));
+		instance3.setPilots(List.of(pilots));
+		flight1.addFlightInstance(instance3);
+		var instance4 = new FlightInstance(flight1, "1114", LocalDate.of(2020, 12, 4));
+		instance4.setCrews(List.of(crews));
+		instance4.setPilots(List.of(pilots));
+		flight1.addFlightInstance(instance4);
+		var flight2 = flights.get(1);
+		var instance5 = new FlightInstance(flight2, "1115", LocalDate.of(2020, 12, 1));
+		instance5.setCrews(List.of(crews));
+		instance5.setPilots(List.of(pilots));
+		flight2.addFlightInstance(instance5);
+		var instance6 = new FlightInstance(flight2, "1116", LocalDate.of(2020, 12, 2));
+		instance6.setCrews(List.of(crews));
+		instance6.setPilots(List.of(pilots));
+		flight2.addFlightInstance(instance6);
+		var instance7 = new FlightInstance(flight2, "1117", LocalDate.of(2020, 12, 3));
+		instance7.setCrews(List.of(crews));
+		instance7.setPilots(List.of(pilots));
+		flight2.addFlightInstance(instance7);
+		var instance8 = new FlightInstance(flight2, "1118", LocalDate.of(2020, 12, 4));
+		instance8.setCrews(List.of(crews));
+		instance8.setPilots(List.of(pilots));
+		flight2.addFlightInstance(instance8);
+		flightInstances.add(instance1);
+		flightInstances.add(instance2);
+		flightInstances.add(instance3);
+		flightInstances.add(instance4);
+		flightInstances.add(instance5);
+		flightInstances.add(instance6);
+		flightInstances.add(instance7);
+		flightInstances.add(instance8);
+	}
 	public List<Airport> getAirports() {
 		return airports;
 	}
@@ -59,5 +110,7 @@ public class Repository {
 	public List<Flight> getFlights(){
 		return flights;
 	}
-	
+	public List<FlightInstance> getFlightInstances() {
+		return flightInstances;
+	}
 }

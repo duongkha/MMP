@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Flight{
@@ -20,6 +21,7 @@ public class Flight{
 		this.capacity = capacity;
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
+		flightInstances = new ArrayList<FlightInstance>();
 	}
 	
 	public LocalTime getDepartureTime() {
