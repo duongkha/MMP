@@ -1,4 +1,41 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Passenger {
-
+	private String Id;
+	private String firstName;
+	private String lastName;
+	private LocalDate DOB;
+	private String emailAddress;
+	private List<Reservation> reservations;
+	
+	public Passenger(String id, String firstName, String lastName, LocalDate dOB, String emailAddress) {
+		super();
+		Id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		DOB = dOB;
+		this.emailAddress = emailAddress;
+		reservations = new ArrayList<Reservation>();
+	}
+	public String getId() {
+		return Id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public LocalDate getDOB() {
+		return DOB;
+	}
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+	
+	public void addReservation(Reservation reservation) {
+		this.reservations.add(reservation);
+	}
 }

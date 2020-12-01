@@ -1,10 +1,18 @@
 import java.util.List;
 
-public class FlightInstance extends Flight {
+public class FlightInstance {
 	List<Reservation> reservations;
-	
+	Flight flight;
 	public FlightInstance() {
-		super();
+		
 	}
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+	
+	public Flight getFlight() {
+		return flight;
+	}
+	
 	
 }

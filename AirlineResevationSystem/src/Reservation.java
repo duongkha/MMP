@@ -7,10 +7,27 @@ public class Reservation {
 	String agentId;
 
 	public Reservation() {
-		super();
+		flightInstance = new ArrayList<FlightInstance>();
+		tickets = new ArrayList<Ticket>();
 	}
 	
-	public void confirmReservation() {
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public List<FlightInstance> getFlightInstance() {
+		return flightInstance;
+	}
+
+	public String getAgentId() {
+		return agentId;
+	}
+
+	public boolean confirmReservation() {
 		//create new tickets
+		return false;
+	}
+	public boolean makeReservation() {
+		return false;
 	}
 }
