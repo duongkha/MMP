@@ -35,6 +35,10 @@ public class Passenger {
 		return emailAddress;
 	}
 	
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+	
 	public void addReservation(Reservation reservation) {
 		this.reservations.add(reservation);
 	}

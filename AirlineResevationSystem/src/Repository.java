@@ -135,8 +135,10 @@ public class Repository {
 		instances.add(flightInstances.get(5)); // 2020 12 02
 		var reser1 = new Reservation("000002",instances, agents.get(0).getAgentId(),
 				passengers.get(0));
+		passengers.get(0).addReservation(reser1);
 		var reser2 = new Reservation("000001",instances, agents.get(0).getAgentId(),
 				passengers.get(1));
+		passengers.get(1).addReservation(reser2);
 		reservations.add(reser1);
 		reservations.add(reser2);
 	}
@@ -163,6 +165,22 @@ public class Repository {
 	public List<Reservation> getReservations() {
 		return reservations;
 	}
+	public List<Reservation> getReservations(Agent agent) {
+		List<Reservation> list = new ArrayList<Reservation>();
+		for(var item: this.reservations) {
+			if(item.getAgentId().equalsIgnoreCase(agent.getAgentId()))
+				list.add(item);
+		}
+		return list;
+	}
+	
+	public List<Reservation> getReservations(Passenger passenger) {
+		if(passenger != null)
+			return passenger.getReservations();
+		return null;
+	}
+	
+	
 	public boolean deleteReservation(String reservationId) {
 		for(var item: this.reservations) {
 			if(item.getReservationId().equalsIgnoreCase(reservationId)) {

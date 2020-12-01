@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Agent {
@@ -18,10 +19,17 @@ public class Agent {
 	}
 	
 	public List<Passenger> getPassengers(){
+		var reservations = Repository.getInstance().getReservations(this);
+		if(reservations != null) {
+			List<Passenger> list = new ArrayList<Passenger>();
+			for(var item: reservations)
+				list.add(item.passenger);
+			return list;
+		}
 		return null;
 	}
 	public List<Reservation> getReservations(){
-		return null;
+		return Repository.getInstance().getReservations(this);
 	}
 	@Override
 	   public String toString() {
