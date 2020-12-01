@@ -1,3 +1,6 @@
+package models;
+
+import utility.Helper;
 
 public class Ticket {
 	FlightInstance flightInstance;

@@ -1,5 +1,8 @@
+package models;
 import java.util.ArrayList;
 import java.util.List;
+
+import service.Repository;
 
 public class Reservation {
 	List<Ticket> tickets;

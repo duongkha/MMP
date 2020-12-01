@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+import service.Repository;
+
 public class Main {
 	private static String userName;
 	
