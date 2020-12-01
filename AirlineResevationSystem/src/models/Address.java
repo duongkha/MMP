@@ -29,5 +29,13 @@ public class Address {
 	public String getZip() {
 		return zip;
 	}
-	
+	@Override
+	   public String toString() {
+	        return ("id: " + this.addressId +
+	        			",street: " + this.street +
+	                    " ,"+ this.city +
+	                    ", " + this.state + 
+	                    "  " + this.zip
+	                    );
+	   }
 }
