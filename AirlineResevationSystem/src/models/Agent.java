@@ -9,7 +9,6 @@ public class Agent {
 	String name;
 	
 	public Agent(String agentId, String name) {
-		super();
 		this.agentId = agentId;
 		this.name = name;
 	}
@@ -36,8 +35,6 @@ public class Agent {
 	}
 	@Override
 	   public String toString() {
-	        return ("id: " + this.agentId +
-	        			",Name: " + this.name
-	                    );
+	        return ("id: " + this.agentId +",Name: " + this.name);
 	   }
 }
