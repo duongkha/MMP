@@ -33,6 +33,11 @@ public class Agent {
 	public List<Reservation> getReservations(){
 		return Repository.getInstance().getReservations(this);
 	}
+	
+	public List<Airport> getAirports(){
+		return Repository.getInstance().getAirports();
+	}
+	
 	@Override
 	   public String toString() {
 	        return ("id: " + this.agentId +",Name: " + this.name);

@@ -43,12 +43,17 @@ public class Passenger {
 	public void addReservation(Reservation reservation) {
 		this.reservations.add(reservation);
 	}
+	
+	public List<Airport> getAirports(){
+		return Repository.getInstance().getAirports();
+	}
+	
 	@Override
-	   public String toString() {
-	        return ("id: " + this.Id +
-	        			",Full Name: " + this.firstName + " " + this.lastName +
-	                    ", DOB: " + this.DOB + 
-	                    ", email: " + this.emailAddress
-	                    );
-	   }
+   public String toString() {
+        return ("id: " + this.Id +
+        			",Full Name: " + this.firstName + " " + this.lastName +
+                    ", DOB: " + this.DOB + 
+                    ", email: " + this.emailAddress
+                    );
+   }
 }
