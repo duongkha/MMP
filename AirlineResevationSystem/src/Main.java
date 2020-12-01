@@ -6,7 +6,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Repository repo = new Repository();
+		Repository repo = Repository.getInstance();
 		System.out.println("Welcome to Airline Reservation System");
 //		Scanner myObj = new Scanner(System.in); 
 //	    System.out.println("Enter username");
@@ -24,6 +24,10 @@ public class Main {
 		System.out.println("Flight list:" +  flights.toString());
 		var instances = repo.getFlightInstances();
 		System.out.println("Flight Instance list:" +  instances.toString());
+		var passengers = repo.getPassengers();
+		System.out.println("Passenger list:" +  passengers.toString());
+		var agents = repo.getAgents();
+		System.out.println("Agent list:" +  agents.toString());
 	}
 	private static void checkUserType() {
 		

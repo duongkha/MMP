@@ -5,11 +5,21 @@ import java.util.List;
 
 public class Repository {
 
-	static List<Airport> airports;
-	static List<Airline> airlines;
-	static List<Flight> flights;
-	static List<FlightInstance> flightInstances;
-	public Repository() {
+	List<Airport> airports;
+	List<Airline> airlines;
+	List<Flight> flights;
+	List<FlightInstance> flightInstances;
+	List<Passenger> passengers;
+	List<Agent> agents;
+	
+	static Repository repository = null;
+	public static Repository getInstance(){
+		if(repository == null)
+			repository = new Repository();
+		return repository;
+	}
+	
+	Repository() {
 		Initialize();
 	}
 	private void Initialize() {
@@ -17,6 +27,8 @@ public class Repository {
 		InitAirlines();
 		InitFlights();
 		InitFlightInstances();
+		InitPassengers();
+		InitAgents();
 	}
 	
 	private void InitAirports() {
@@ -99,6 +111,20 @@ public class Repository {
 		flightInstances.add(instance7);
 		flightInstances.add(instance8);
 	}
+	private void InitPassengers() {
+		passengers = new ArrayList<Passenger>();
+		var p1 = new Passenger("1", "John", "Churchill",LocalDate.of(1990, 9, 10) ,"jonhchurchill@gmail.com");
+		var p2 = new Passenger("2", "Mary", "Churchill",LocalDate.of(1991, 12, 19) ,"marychurchill@gmail.com");
+		passengers.add(p1);
+		passengers.add(p2);
+	}
+	private void InitAgents() {
+		agents = new ArrayList<Agent>();
+		var agent1 = new Agent("1", "Agent 1");
+		var agent2 = new Agent("2", "Agent 2");
+		agents.add(agent1);
+		agents.add(agent2);
+	}
 	public List<Airport> getAirports() {
 		return airports;
 	}
@@ -113,4 +139,11 @@ public class Repository {
 	public List<FlightInstance> getFlightInstances() {
 		return flightInstances;
 	}
+	public List<Agent> getAgents() {
+		return agents;
+	}
+	public List<Passenger> getPassengers() {
+		return passengers;
+	}
 }
+
