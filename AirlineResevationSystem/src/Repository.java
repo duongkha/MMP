@@ -11,6 +11,7 @@ public class Repository {
 	List<FlightInstance> flightInstances;
 	List<Passenger> passengers;
 	List<Agent> agents;
+	List<Reservation> reservations;
 	
 	static Repository repository = null;
 	public static Repository getInstance(){
@@ -29,6 +30,7 @@ public class Repository {
 		InitFlightInstances();
 		InitPassengers();
 		InitAgents();
+		InitReservations();
 	}
 	
 	private void InitAirports() {
@@ -72,7 +74,6 @@ public class Repository {
 		instance1.setCrews(List.of(crews));
 		instance1.setPilots(List.of(pilots));
 		flight1.addFlightInstance(instance1);
-		
 		var instance2 = new FlightInstance(flight1, "1112", LocalDate.of(2020, 12, 2));
 		instance2.setCrews(List.of(crews));
 		instance2.setPilots(List.of(pilots));
@@ -85,11 +86,13 @@ public class Repository {
 		instance4.setCrews(List.of(crews));
 		instance4.setPilots(List.of(pilots));
 		flight1.addFlightInstance(instance4);
+		
 		var flight2 = flights.get(1);
 		var instance5 = new FlightInstance(flight2, "1115", LocalDate.of(2020, 12, 1));
 		instance5.setCrews(List.of(crews));
 		instance5.setPilots(List.of(pilots));
 		flight2.addFlightInstance(instance5);
+		
 		var instance6 = new FlightInstance(flight2, "1116", LocalDate.of(2020, 12, 2));
 		instance6.setCrews(List.of(crews));
 		instance6.setPilots(List.of(pilots));
@@ -125,6 +128,18 @@ public class Repository {
 		agents.add(agent1);
 		agents.add(agent2);
 	}
+	private void InitReservations() {
+		reservations = new ArrayList<Reservation>();
+		var instances = new ArrayList<FlightInstance>(); 
+		instances.add(flightInstances.get(0)); //2020 12 01
+		instances.add(flightInstances.get(5)); // 2020 12 02
+		var reser1 = new Reservation(instances, agents.get(0).getAgentId(),
+				passengers.get(0));
+		var reser2 = new Reservation(instances, agents.get(0).getAgentId(),
+				passengers.get(1));
+		reservations.add(reser1);
+		reservations.add(reser2);
+	}
 	public List<Airport> getAirports() {
 		return airports;
 	}
@@ -144,6 +159,9 @@ public class Repository {
 	}
 	public List<Passenger> getPassengers() {
 		return passengers;
+	}
+	public List<Reservation> getReservations() {
+		return reservations;
 	}
 }
 

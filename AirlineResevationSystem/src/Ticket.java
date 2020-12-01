@@ -5,8 +5,14 @@ public class Ticket {
 	String ticketId;
 	String ticketNumber;
 
+	
+	public Ticket(FlightInstance flightInstance, Reservation reservation) {
+		this.flightInstance = flightInstance;
+		this.reservation = reservation;
+		ticketId = ticketNumber = Helper.generateTicketNumber();
+	}
+
 	public Ticket(Reservation reservation) {
-		super();
 		this.reservation = reservation;
 		ticketId = ticketNumber = Helper.generateTicketNumber();
 	}
@@ -22,5 +28,10 @@ public class Ticket {
 	public String getTicketNumber() {
 		return ticketNumber;
 	}
-	
+	@Override
+	   public String toString() {
+	        return ("id: " + this.ticketId +
+	        			",ticket number: " + this.ticketNumber
+	                    );
+	   }
 }
