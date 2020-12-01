@@ -43,7 +43,15 @@ public class Flight{
 	public List<FlightInstance> getFlightInstances() {
 		return flightInstances;
 	}
-	
+	@Override
+	   public String toString() {
+	        return ("id: " + this.flightId +
+	        			",departure time: " + this.departureTime +
+	                    " ,departure airport: "+ this.departureAirport +
+	                    ", arrival time: " + this.arrivalTime + 
+	                    ", arrival airport: " + this.arrivalAirport
+	                    );
+	   }
 	public void addFlightInstance(FlightInstance instance) {
 		flightInstances.add(instance);
 	}
