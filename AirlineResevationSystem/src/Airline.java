@@ -31,6 +31,14 @@ public class Airline {
 	public List<Flight> getFlights() {
 		return flights;
 	}
+	
+	 @Override
+	   public String toString() {
+	        return ("id: " + this.airlineId+
+	        			",code: " + this.code+
+	                    " ,name: "+ this.name);
+	   }
+	 
 	public void addFlight(Flight flight) {
 		this.flights.add(flight);
 	}

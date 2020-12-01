@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,14 @@ public class Repository {
 	}
 	private void InitFlights() {
 		flights = new ArrayList<Flight>();
-		//var flight1 = new Flight();
+		var airport1 = airports.get(0);
+		var airport2 = airports.get(1);
+		var flight1 = new Flight(LocalTime.of(7, 0),LocalTime.of(9, 15),"3333",
+				200,airport1,airport2);
+		var flight2 = new Flight(LocalTime.of(9, 30),LocalTime.of(11, 45),"7777",
+				200,airport2,airport1);
+		flights.add(flight1);
+		flights.add(flight2);
 		
 	}
 	public List<Airport> getAirports() {

@@ -31,7 +31,12 @@ public class Airport {
 	public List<Flight> getFlights(){
 		return flights;
 	}
-	
+	 @Override
+	   public String toString() {
+	        return ("id: " + this.airportId+
+	        			",code: " + this.code+
+	                    " ,name: "+ this.name);
+	   }
 	public void addFlight(Flight flight) {
 		this.flights.add(flight);
 	}
