@@ -66,13 +66,19 @@ public class Repository {
 		flights = new ArrayList<Flight>();
 		var airport1 = airports.get(0);
 		var airport2 = airports.get(1);
+		var airline1 = airlines.get(0);
+		var airline2 = airlines.get(1);
 		var flight1 = new Flight(LocalTime.of(7, 0),LocalTime.of(9, 15),"3333",
-				200,airport1,airport2);
+				200,airport1,airport2,airline1);
 		var flight2 = new Flight(LocalTime.of(9, 30),LocalTime.of(11, 45),"7777",
-				200,airport2,airport1);
+				200,airport2,airport1,airline2);
+
+		var flight3 = new Flight(LocalTime.of(15, 30),LocalTime.of(16, 45),"9999",
+				300,airport1,airport2,airline1);
+		
 		flights.add(flight1);
 		flights.add(flight2);
-		
+		flights.add(flight3);
 	}
 	
 	private void InitFlightInstances() {
@@ -199,6 +205,20 @@ public class Repository {
 			}
 		}
 		return false;
+	}
+	
+	/* By SaNguyen*/
+	
+	public List<Airline> getAirlinesDepartFrom(String airportCode){
+		List<Airline> airlinesByAirportCode = new ArrayList<Airline>();
+
+		for(Flight flight:flights) {
+			if(flight.getDepartureAirport().getCode().equalsIgnoreCase(airportCode)) {
+				if(!airlinesByAirportCode.contains(flight.getAirline()))
+					airlinesByAirportCode.add(flight.getAirline());
+			}
+		}
+		return airlinesByAirportCode;
 	}
 }
 

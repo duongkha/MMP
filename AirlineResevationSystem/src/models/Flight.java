@@ -3,7 +3,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Flight{
+public class Flight {
 	LocalTime departureTime;
 	LocalTime arrivalTime;
 	String flightId;
@@ -12,9 +12,10 @@ public class Flight{
 	Airport departureAirport;
 	Airport arrivalAirport;
 	List<FlightInstance> flightInstances;
+	Airline airline;
 	
 	public Flight(LocalTime departureTime, LocalTime arrivalTime, String flightId, int capacity,
-			Airport departureAirport, Airport arrivalAirport) {
+			Airport departureAirport, Airport arrivalAirport, Airline airline) {
 		super();
 		this.departureTime = departureTime;
 		this.arrivalTime = arrivalTime;
@@ -23,6 +24,7 @@ public class Flight{
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 		flightInstances = new ArrayList<FlightInstance>();
+		this.airline = airline;
 	}
 	
 	public LocalTime getDepartureTime() {
@@ -58,4 +60,12 @@ public class Flight{
 	public void addFlightInstance(FlightInstance instance) {
 		flightInstances.add(instance);
 	}
+	
+	
+	public Airline getAirline() {
+		return airline;
+	}
+
+
+
 }

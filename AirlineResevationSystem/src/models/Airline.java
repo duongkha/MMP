@@ -2,7 +2,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Airline {
+public class Airline implements Comparable<Airline>{
 	String airlineId;
 	String code;
 	String name;
@@ -42,5 +42,18 @@ public class Airline {
 	 
 	public void addFlight(Flight flight) {
 		this.flights.add(flight);
+	}
+	
+
+	@Override
+	public int compareTo(Airline airline) {
+		if(airline != null) {
+			if(airline instanceof Airline) {
+				if(airline.getCode().equalsIgnoreCase(code)) {
+					return 1;
+				}
+			}
+		}
+		return 0;
 	}
 }
