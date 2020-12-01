@@ -4,11 +4,13 @@ import java.util.List;
 public class Reservation {
 	List<Ticket> tickets;
 	List<FlightInstance> flightInstance;
+	String reservationId;
 	String agentId;
 	Passenger passenger;
 
-	public Reservation(List<FlightInstance> flightInstance, String agentId, Passenger passenger) {
+	public Reservation(String reservationId, List<FlightInstance> flightInstance, String agentId, Passenger passenger) {
 		super();
+		this.reservationId = reservationId;
 		this.flightInstance = flightInstance;
 		this.agentId = agentId;
 		this.passenger = passenger;
@@ -21,6 +23,10 @@ public class Reservation {
 
 	public List<FlightInstance> getFlightInstance() {
 		return flightInstance;
+	}
+	
+	public String getReservationId() {
+		return reservationId;
 	}
 
 	public String getAgentId() {
@@ -48,6 +54,10 @@ public class Reservation {
 		}
 		return false;
 	}
+	public boolean cancel() {
+		return Repository.getInstance().deleteReservation(this.reservationId);
+	}
+	
 	public boolean makeReservation() {
 		return false;
 	}

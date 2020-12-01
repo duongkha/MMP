@@ -35,7 +35,10 @@ public class Main {
 		if(result) {
 			System.out.println(reser1.toString());
 		}
-		
+		result =  reser1.cancel();
+		if(result) {
+			System.out.println("Reservation is cancelled.");
+		}
 	}
 	private static void checkUserType() {
 		
