@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import service.DataService;
-import service.Repository;
 
 public class Passenger {
 	private String Id;
@@ -53,10 +52,10 @@ public class Passenger {
 	
 	@Override
    public String toString() {
-        return ("id: " + this.Id +
-        			",Full Name: " + this.firstName + " " + this.lastName +
-                    ", DOB: " + this.DOB + 
-                    ", email: " + this.emailAddress
+        return ("ID: " + this.Id +
+        			"\tFULL NAME: " + this.firstName + " " + this.lastName +
+                    "\tDOB: " + this.DOB + 
+                    "\tEMAIL: " + this.emailAddress
                     );
     }
 }

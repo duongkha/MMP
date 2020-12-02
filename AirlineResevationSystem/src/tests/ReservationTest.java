@@ -26,9 +26,9 @@ public class ReservationTest {
 		Flight flight = new Flight(LocalTime.of(12, 05), 
 				LocalTime.of(13, 05), "FL980", 65,
 				new Airport("004", "CID", "Cedar Rapids Airport", 
-					new Address("78", "2121 Aurthur Collins Parkway SW", "Iowa", "Cedar Rapids", "52404")),
+					new Address("78", "2121 Aurthur Collins Parkway SW", "Cedar Rapids","Iowa",  "52404")),
 				new Airport("007", "OIA", "O'hare International Airport",
-					new Address("45", "10000 Ohare ave", "Illinios", "Chicago", "60666")),
+					new Address("45", "10000 Ohare ave", "Chicago","Illinios",  "60666")),
 				new Airline("002", "AE", "American Eagle", "Very Good history"));
 		FlightInstance flightInstance = new FlightInstance(flight, "FN678", LocalDate.now());
 		List<FlightInstance> flightInstanceList = new ArrayList<>();

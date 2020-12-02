@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import models.Address;
 import models.Airport;
-import models.Flight;
-
 
 public class AirportTest {
 	private static Airport airport; 
@@ -15,7 +13,7 @@ public class AirportTest {
 	@BeforeAll
 	public static void setUp() {
 		airport = new Airport("004", "CID", "Cedar Rapids Airport", 
-				new Address("78", "2121 Aurthur Collins Parkway SW", "Iowa", "Cedar Rapids", "52404"));
+				new Address("78", "2121 Aurthur Collins Parkway SW", "Cedar Rapids","Iowa",  "52404"));
 	}
 	@Test
 	public void testGetAirportId() {
@@ -44,12 +42,4 @@ public class AirportTest {
 		Assertions.assertNotNull(output);
 		Assertions.assertTrue(output instanceof Address);
 	}
-	@Test 
-	public void testGetFlights() {
-		var output= airport.getFlights();
-		Assertions.assertNotNull(output);
-		for(var v: output) {
-			Assertions.assertTrue(v instanceof Flight);
-		}
-	}	
 }

@@ -35,7 +35,7 @@ public class Airline implements Comparable<Airline>{
 	
 	 @Override
 	   public String toString() {
-	        return ("Id: " + this.airlineId + "\t\tCode: " + this.code + "\t\tName: "+ this.name);
+	        return ("ID: " + this.airlineId + "\t\tCODE: " + this.code + "\t\tNAME: "+ this.name);
 	   }
 	 
 	public void addFlight(Flight flight) {

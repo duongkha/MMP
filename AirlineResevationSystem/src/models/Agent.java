@@ -40,6 +40,6 @@ public class Agent {
 	
 	@Override
 	   public String toString() {
-	        return ("id: " + this.agentId +",Name: " + this.name);
+	        return ("ID: " + this.agentId +"\tNAME: " + this.name);
 	   }
 }
