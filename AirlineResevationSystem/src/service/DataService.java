@@ -220,20 +220,21 @@ public class DataService implements Repository{
 	}
 	
 	public List<Reservation> getReservationsByPassengerId(String id){
-		var passenger = DataService.getInstance().getPassengerById(id);
-		if(passenger != null) {
-			return passenger.getReservations();
+		List<Reservation> list = new ArrayList<Reservation>();
+		for(var item:this.reservations) {
+			if(item.getPassenger().getId().equalsIgnoreCase(id))
+				list.add(item);
 		}
-		return null;
+		return list;
 	}
 	
 	public List<Reservation> getReservationsByAgentId(String id){
-		var agent = DataService.getInstance().getAgentById(id);
-		if(agent != null)
-		{
-			return agent.getReservations();
+		List<Reservation> list = new ArrayList<Reservation>();
+		for(var item:this.reservations) {
+			if(item.getAgentId().equalsIgnoreCase(id))
+				list.add(item);
 		}
-		return null;
+		return list;
 	}
 	public boolean confirmReservationByPassenger(String reservationId,String passengerId) {
 		var reservations = DataService.getInstance().getReservationsByPassengerId(passengerId);
@@ -276,7 +277,7 @@ public class DataService implements Repository{
 		}
 		return false;
 	}
-	/* By SaNguyen*/
+
 	
 	public List<Airline> getAirlinesDepartFrom(String airportCode){
 		List<Airline> airlinesByAirportCode = new ArrayList<Airline>();
@@ -289,5 +290,16 @@ public class DataService implements Repository{
 		}
 		return airlinesByAirportCode;
 	}
+	
+	public void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
+		try {
+			Reservation reservation = Reservation.makeReservation(reservationId, flightInstances, agentId, passenger);
+			reservations.add(reservation);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
 }
 
