@@ -71,11 +71,11 @@ public class FlightInstance  implements Comparable<FlightInstance>{
 	}
 	@Override
 	   public String toString() {
-	        return ("id: " + this.id +
-	        			",date: " + this.date +
-	                    " ,flight: "+ this.flight +
-	                    ", crews: " + this.crews.toString() + 
-	                    ", pilots: " + this.pilots.toString()
+	        return ("ID: " + this.id +
+	        			"\tDATE: " + this.date +
+	                    "\nFLIGHT:\n "+ this.flight +
+	                    "\nCREWS: " + this.crews.toString() + 
+	                    "\nPILOTS: " + this.pilots.toString()
 	                    );
 	   }
 }

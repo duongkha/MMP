@@ -31,8 +31,8 @@ public class Address {
 	}
 	@Override
     public String toString() {
-        return ("id: " + this.addressId +
-        			",street: " + this.street +
+        return ("ID: " + this.addressId +
+        			"\t " + this.street +
                     " ,"+ this.city +
                     ", " + this.state + 
                     "  " + this.zip

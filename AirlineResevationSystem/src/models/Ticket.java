@@ -39,8 +39,6 @@ public class Ticket {
 	}
 	@Override
 	   public String toString() {
-	        return ("id: " + this.ticketId +
-	        			",ticket number: " + this.ticketNumber
-	                    );
+	        return ("ID: " + this.ticketId + "\tTICKET NUMBER: " + this.ticketNumber);
 	   }
 }

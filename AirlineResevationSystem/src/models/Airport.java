@@ -34,7 +34,7 @@ public class Airport {
 	}
 	 @Override
 	   public String toString() {
-	        return ("Id: " + this.airportId + "\t\tCode: " + this.code + "\t\tName: "+ this.name);
+	        return ("ID: " + this.airportId + "\tCODE: " + this.code + "\tNAME: "+ this.name);
 	   }
 	public void addFlight(Flight flight) {
 		this.flights.add(flight);
