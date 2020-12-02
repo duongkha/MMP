@@ -2,7 +2,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import service.Repository;
+import service.DataService;
 
 public class Agent {
 	String agentId;
@@ -21,7 +21,7 @@ public class Agent {
 	}
 	
 	public List<Passenger> getPassengers(){
-		var reservations = Repository.getInstance().getReservations(this);
+		var reservations = DataService.getInstance().getReservations(this);
 		if(reservations != null) {
 			List<Passenger> list = new ArrayList<Passenger>();
 			for(var item: reservations)
@@ -31,11 +31,11 @@ public class Agent {
 		return null;
 	}
 	public List<Reservation> getReservations(){
-		return Repository.getInstance().getReservations(this);
+		return DataService.getInstance().getReservations(this);
 	}
 	
 	public List<Airport> getAirports(){
-		return Repository.getInstance().getAirports();
+		return DataService.getInstance().getAirports();
 	}
 	
 	@Override

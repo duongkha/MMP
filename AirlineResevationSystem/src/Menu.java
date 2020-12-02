@@ -1,9 +1,4 @@
-import java.awt.event.KeyEvent;
-import java.util.Scanner;
-
-
-import service.Repository;
-
+import service.DataService;
 public class Menu {
 	private final String MENU_STRING_1 = "\nPLEASE SELECT:"+
 						"\n1.View list of airports" + 
@@ -76,7 +71,7 @@ public class Menu {
 			switch(commandIndex) {
 			case 1://view airports
 				 System.out.println("List of airports:");  
-				 var airports = Repository.getInstance().getAirports();
+				 var airports = DataService.getInstance().getAirports();
 				 for(var item:airports)
 					 System.out.println(item.toString());
 				break;
@@ -91,9 +86,8 @@ public class Menu {
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger
-					var passenger = Repository.getInstance().getPassengerById(userId);
-					if(passenger != null) {
-						var reservations = passenger.getReservations();
+					var reservations = DataService.getInstance().getReservationsByPassengerId(userId);
+					if(reservations != null) {
 						System.out.println("List of reservation:");  
 						for(var item:reservations)
 							System.out.println(item);
@@ -101,10 +95,9 @@ public class Menu {
 				}
 				else
 				if(userType == 2){//agent
-					var agent = Repository.getInstance().getAgentById(userId);
-					if(agent != null)
+					var reservations = DataService.getInstance().getReservationsByAgentId(userId);
+					if(reservations != null)
 					{
-						var reservations = agent.getReservations();
 						System.out.println("List of reservation:");  
 						for(var item:reservations)
 							System.out.println(item);
@@ -123,56 +116,21 @@ public class Menu {
 				String id = readCommandString();
 				if(!id.isEmpty()) {
 					if(userType == 1) {
-						boolean found = false;
-						var passenger = Repository.getInstance().getPassengerById(userId);
-						if(passenger != null) {
-							var reservations = passenger.getReservations();
-							for(var item:reservations){
-								if(item.getReservationId().equalsIgnoreCase(id)) {
-									found = true;
-									if(item.getTickets().size() == 0) {
-										boolean result = item.confirmReservation();
-										if(result) {
-											System.out.println("Reservation " + item.getReservationId() +  " purchased.");
-											break;
-										}
-									}
-									else {
-										System.out.println("Reservation purchased already.");
-										break;
-									}
-								}
-							}
+						var result = DataService.getInstance().confirmReservationByPassenger(id, userId);
+						if(result) {
+							System.out.println("Reservation " + id +  " purchased.");
 						}
-						if(!found)
-							System.out.println("ERROR: Reservation Not Found.");
+						else
+							System.out.println("ERROR: Reservation Not Found or confirmed already.");
 					}
 					else
 					if(userType == 2){//agent
-						var agent = Repository.getInstance().getAgentById(userId);
-						boolean found = false;
-						if(agent != null)
-						{
-							var reservations = agent.getReservations();
-							for(var item:reservations){
-								if(item.getReservationId().equalsIgnoreCase(id)) {
-									found = true;
-									if(item.getTickets().size() == 0) {
-										boolean result = item.confirmReservation();
-										if(result) {
-											System.out.println("Reservation " + item.getReservationId() +  " purchased.");
-											break;
-										}
-									}
-									else {
-										System.out.println("Reservation purchased already.");
-										break;
-									}
-								}
-							}
+						var result = DataService.getInstance().confirmReservationByAgent(id, userId);
+						if(result) {
+							System.out.println("Reservation " + id +  " purchased.");
 						}
-						if(!found)
-							System.out.println("ERROR: Reservation Not Found.");
+						else
+							System.out.println("ERROR: Reservation Not Found or confirmed already.");
 					}
 				}
 				
