@@ -1,5 +1,6 @@
 package service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import models.Agent;
@@ -32,5 +33,6 @@ public interface Repository {
 	void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger);
 	Reservation getReservationIdAndAgent(String reservationId, String agentId);
 	Reservation getReservationIdAndPassenger(String reservationId, String passengerId);
+	List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date);
 	
 }

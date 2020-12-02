@@ -338,5 +338,29 @@ public class DataService implements Repository{
 		
 	}
 	
+	public List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date){
+
+		 
+
+        List<Flight> listOfFlights = new ArrayList<Flight>();
+        
+        for(FlightInstance flightInstance: flightInstances) {
+            
+            if (flightInstance.getDate().equals(date)) {
+                
+                Flight flight = flightInstance.getFlight();
+                
+                if(flight.getDepartureAirport().getCode().equalsIgnoreCase(departureAirportCode)) {
+                    if (flight.getArrivalAirport().getCode().equalsIgnoreCase(arrivalAirportCode)) {
+                        listOfFlights.add(flight);
+                    }
+                }
+                
+            }
+        }
+        
+        return listOfFlights;
+    }
+	
 }
 

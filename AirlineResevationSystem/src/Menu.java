@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.List;
 
 import models.Airline;
@@ -93,6 +94,7 @@ public class Menu {
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
+				System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger
