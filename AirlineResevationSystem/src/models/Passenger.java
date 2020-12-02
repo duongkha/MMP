@@ -57,5 +57,5 @@ public class Passenger {
                     ", DOB: " + this.DOB + 
                     ", email: " + this.emailAddress
                     );
-   }
+    }
 }
