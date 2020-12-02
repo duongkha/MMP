@@ -6,12 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import models.Address;
 import models.Airline;
 import models.Airport;
 import models.Flight;
 import models.FlightInstance;
+import models.Passenger;
+import models.Reservation;
 import models.Ticket;
 
 public class TicketTest {
@@ -27,5 +31,34 @@ public class TicketTest {
 					new Address("45", "10000 Ohare ave", "Illinios", "Chicago", "60666")),
 				new Airline("002", "AE", "American Eagle", "Very Good history"));
 		FlightInstance flightInstance = new FlightInstance(flight, "FN678", LocalDate.now());
+		List<FlightInstance> flightInstanceList = new ArrayList<>();
+		flightInstanceList.add(flightInstance);
+		Reservation reservation = new Reservation("0091", flightInstanceList, "99", 
+				new Passenger("065", "John", "Doe", LocalDate.of(1990, 10, 10), "john@doe.com"));
+		ticket = new Ticket(flightInstance, reservation);	
+	}
+	@Test
+	public void testGetTicketId() {
+		var output = ticket.getTicketId();
+		Assertions.assertNotNull(output);
+		Assertions.assertFalse(output.isEmpty());
+	}
+	@Test
+	public void testGetTicketNumber() {
+		var output = ticket.getTicketNumber();
+		Assertions.assertNotNull(output);
+		Assertions.assertFalse(output.isEmpty());
+	}
+	@Test
+	public void testGetFlightInstance() {
+		var output = ticket.getFlightInstance();
+		Assertions.assertNotNull(output);
+		Assertions.assertTrue(output instanceof FlightInstance);
+	}
+	@Test
+	public void testGetReservation() {
+		var output =ticket.getReservation();
+		Assertions.assertNotNull(output);
+		Assertions.assertTrue(output instanceof Reservation);
 	}
 }
