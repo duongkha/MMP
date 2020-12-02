@@ -371,7 +371,9 @@ public class DataService implements Repository{
 		if(flightInstances == null || flightInstances.isEmpty() || passenger == null) {
 			return null;	
 		}
-		return new Reservation(reservationId, flightInstances, agentId, passenger);	
+		Reservation reservation =  new Reservation(reservationId, flightInstances, agentId, passenger);	
+		reservations.add(reservation);
+		return reservation;
 	}
 	
 	public List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date){
