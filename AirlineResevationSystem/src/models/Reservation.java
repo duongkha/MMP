@@ -49,8 +49,8 @@ public class Reservation implements Comparable<Reservation>{
 	@Override
 	   public String toString() {
 		//TODO: well-formed printing
-		String s = "=============================SERVERVATION INFORMATION================================="+
-					"\nSERVERVATION ID: " + this.reservationId +
+		String s = "=============================RESEVERVATION INFORMATION================================="+
+					"\nRESEVERVATION ID: " + this.reservationId +
 					"\nAGENT ID:" + this.agentId +
 					"\nPASSENGER INFORMATION:"+
 					"\nNAME: " + this.passenger.getFirstName() + "," + this.passenger.getLastName()+
