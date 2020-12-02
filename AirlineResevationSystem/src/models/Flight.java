@@ -1,4 +1,5 @@
 package models;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,15 @@ public class Flight {
 		return airline;
 	}
 
-
+	public FlightInstance getFlightIntanceByDate(LocalDate date) {
+		if(date != null) {
+			for(FlightInstance instance: flightInstances) {
+				if(instance.getDate().isEqual(date)) {
+					return instance;				
+				}
+			}
+		}
+		return null;
+	}
 
 }

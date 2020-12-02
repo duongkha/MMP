@@ -1,7 +1,12 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Airline;
+import models.Flight;
+import models.FlightInstance;
+import models.Passenger;
+import models.Reservation;
 import service.DataService;
 public class Menu {
 	private final String MENU_STRING_1 = "\nPLEASE SELECT:"+
@@ -94,7 +99,23 @@ public class Menu {
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
-				System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
+				//System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
+				//Lisa did for testing reservation, you can update,Dalai!
+				System.out.print("Input Departure Airport Code:");
+				String departureAiport = readCommandString(); //CID
+				
+				System.out.print("Input Arrival Airport Code:");
+				String arrivalAiport = readCommandString(); //ORD
+
+				System.out.print("Input Date:");
+				String stringDate = readCommandString(); //2020-12-04
+				LocalDate date = LocalDate.parse(stringDate);
+				
+				List<Flight> flights = DataService.getInstance().getListOfFlights(departureAiport, arrivalAiport, date);
+				for(Flight flight: flights) {
+					System.out.println(flight.toString() );
+				}
+				
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger
@@ -134,6 +155,47 @@ public class Menu {
 				}
 				break;
 			case 6://Make a reservation ->Sa
+				List<FlightInstance> flightInstances = new ArrayList<FlightInstance>();		
+				
+				System.out.print("Enter Passenger Id:");
+				String PassengerId = readCommandString();
+				
+				Passenger passenger = DataService.getInstance().getPassengerById(PassengerId);
+				
+				while(true) {					
+					System.out.print("Enter Flight Id:");
+					String flightId = readCommandString();
+					Flight flight = DataService.getInstance().getFlightById(flightId);
+					/*if(flight == null) {
+						System.out.println("Flight is not availablbe!");
+						break;
+					}*/
+					System.out.print("Enter Date:");
+					
+					String strDate = readCommandString();
+					LocalDate flightDate = LocalDate.parse(strDate);
+					FlightInstance flightInst = flight.getFlightIntanceByDate(flightDate);
+					if(flightInst !=null)
+						flightInstances.add(flightInst);
+					
+					System.out.print("Enter another Flight (Y/N):");
+					String cont = readCommandString();
+					if(cont.compareToIgnoreCase("y") == 0 ) {
+						continue;
+					}
+					break;						
+				}
+				
+				Reservation reservation;
+				if(userType == 1) {
+					reservation = DataService.getInstance().makeReservation(flightInstances, null, passenger);
+					System.out.println(reservation.toString());
+				}
+				else if (userType == 2) {
+					reservation = DataService.getInstance().makeReservation(flightInstances, userId, passenger);
+					System.out.println(reservation.toString());
+				}
+				
 				break;
 			case 7://Cancel a reservation
 				System.out.println("Enter Reservation Number:");

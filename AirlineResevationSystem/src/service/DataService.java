@@ -49,8 +49,13 @@ public class DataService implements Repository{
 		var airport1 = new Airport("111","CID","Cedar Rapids", address1);
 		var address2 = new Address("2","10000 W O'Hare Ave","IL","Chicago","60666");
 		var airport2 = new Airport("112","ORD","O'Hare", address2);
+
+		var address3 = new Address("3","18th Street","CA","San Francisco","94128");
+		var airport3 = new Airport("222","SFO","San Francisco International Airport", address3);
+		
 		airports.add(airport1);
 		airports.add(airport2);
+		airports.add(airport3);
 	}
 	
 	private void InitAirlines() {
@@ -66,19 +71,24 @@ public class DataService implements Repository{
 		flights = new ArrayList<Flight>();
 		var airport1 = airports.get(0);
 		var airport2 = airports.get(1);
+		var airport3 = airports.get(2);
 		var airline1 = airlines.get(0);
 		var airline2 = airlines.get(1);
+
 		var flight1 = new Flight(LocalTime.of(7, 0),LocalTime.of(9, 15),"3333",
 				200,airport1,airport2,airline1);
 		var flight2 = new Flight(LocalTime.of(9, 30),LocalTime.of(11, 45),"7777",
 				200,airport2,airport1,airline2);
 
-		var flight3 = new Flight(LocalTime.of(15, 30),LocalTime.of(16, 45),"9999",
+		var flight3 = new Flight(LocalTime.of(15, 30),LocalTime.of(16, 45),"8888",
 				300,airport1,airport2,airline1);
+		var flight4 = new Flight(LocalTime.of(18, 0),LocalTime.of(19, 15),"9999",
+				300,airport2,airport3,airline1);
 		
 		flights.add(flight1);
 		flights.add(flight2);
 		flights.add(flight3);
+		flights.add(flight4);
 	}
 	
 	private void InitFlightInstances() {
@@ -121,6 +131,20 @@ public class DataService implements Repository{
 		instance8.setCrews(List.of(crews));
 		instance8.setPilots(List.of(pilots));
 		flight2.addFlightInstance(instance8);
+
+		var flight3 = flights.get(2);
+		var instance9 = new FlightInstance(flight3, "2001", LocalDate.of(2020, 12, 4));
+		instance9.setCrews(List.of(crews));
+		instance9.setPilots(List.of(pilots));
+		flight3.addFlightInstance(instance9);
+		
+		
+		var flight4 = flights.get(3);
+		var instance10 = new FlightInstance(flight4, "3003", LocalDate.of(2020, 12, 4));
+		instance10.setCrews(List.of(crews));
+		instance10.setPilots(List.of(pilots));
+		flight4.addFlightInstance(instance10);
+		
 		flightInstances.add(instance1);
 		flightInstances.add(instance2);
 		flightInstances.add(instance3);
@@ -129,6 +153,8 @@ public class DataService implements Repository{
 		flightInstances.add(instance6);
 		flightInstances.add(instance7);
 		flightInstances.add(instance8);
+		flightInstances.add(instance9);
+		flightInstances.add(instance10);
 	}
 	private void InitPassengers() {
 		passengers = new ArrayList<Passenger>();
@@ -327,15 +353,13 @@ public class DataService implements Repository{
 		}
 		return null;
 	}
-	
-	public void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
-		try {
-			Reservation reservation = Reservation.makeReservation(reservationId, flightInstances, agentId, passenger);
-			reservations.add(reservation);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
+
+	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
+		Reservation reservation = Reservation.makeReservation(flightInstances, agentId, passenger);
+		if(reservation != null) {
+			reservations.add(reservation);	
+		}	
+		return reservation;		
 	}
 	
 	public List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date){
@@ -361,6 +385,36 @@ public class DataService implements Repository{
         
         return listOfFlights;
     }
+	
+	public List<FlightInstance> getListOfFlightInstanceById(List<String> flightInstanceIds){
+		List<FlightInstance> flightIns = new ArrayList<FlightInstance>();
+		for(String id:flightInstanceIds) {
+			for(FlightInstance ins: flightInstances) {
+				if(ins.getId().compareToIgnoreCase(id) == 0) {
+					flightIns.add(ins);
+				}
+			}
+		}
+		
+		return flightIns;
+	}
+	public Flight getFlightById(String id) {
+		for(Flight flight: flights) {
+			if(flight.getFlightId().compareToIgnoreCase(id) == 0) {
+				return flight;
+			}
+		}
+		return null;		
+	}
+	
+	public Passenger getPassengetById(String id) {
+		for(Passenger passenger: passengers) {
+			if(passenger.getId().compareToIgnoreCase(id) == 0) {
+				return passenger;
+			}
+		}
+		return null;			
+	}
 	
 }
 

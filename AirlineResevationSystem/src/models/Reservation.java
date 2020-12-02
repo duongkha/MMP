@@ -4,6 +4,7 @@ import java.util.List;
 
 import service.DataService;
 import service.Repository;
+import utility.Helper;
 
 public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;
@@ -104,16 +105,13 @@ public class Reservation implements Comparable<Reservation>{
 		return false;
 	}
 	
-	public static Reservation makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception {
-		if(flightInstances == null || flightInstances.isEmpty()) {
-			throw new Exception("Flight Intances are quired");
+	public static Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
+		String reservationId = Helper.generateTicketNumber();
+		if(flightInstances == null || flightInstances.isEmpty() || passenger == null) {
+			return null;	
 		}
-		
-		if(passenger == null) {
-			throw new Exception("Passenger is quired");
-		}
-		
 		return new Reservation(reservationId, flightInstances, agentId, passenger);
+			
 	}
 	
 }
