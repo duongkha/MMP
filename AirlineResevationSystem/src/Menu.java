@@ -215,7 +215,7 @@ public class Menu {
 					}
 					else
 					if(userType == 2){//agent
-						var result = DataService.getInstance().confirmReservationByAgent(reservationId, userId);
+						var result = DataService.getInstance().cancelReservationByAgent(reservationId, userId);
 						if(result) {
 							System.out.println("Reservation " + reservationId +  " is cancelled.");
 						}
