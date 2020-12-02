@@ -13,6 +13,7 @@ import models.FlightInstance;
 import models.Passenger;
 import models.Reservation;
 import models.Ticket;
+import utility.Helper;
 
 public class DataService implements Repository{
 
@@ -364,12 +365,13 @@ public class DataService implements Repository{
 		return null;
 	}
 
-	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
-		Reservation reservation = Reservation.makeReservation(flightInstances, agentId, passenger);
-		if(reservation != null) {
-			reservations.add(reservation);	
-		}	
-		return reservation;		
+	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger)
+	{
+		String reservationId = Helper.generateTicketNumber();
+		if(flightInstances == null || flightInstances.isEmpty() || passenger == null) {
+			return null;	
+		}
+		return new Reservation(reservationId, flightInstances, agentId, passenger);	
 	}
 	
 	public List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date){
