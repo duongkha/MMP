@@ -28,4 +28,6 @@ public interface Repository {
 	List<Airline> getAirlinesDepartFrom(String airportCode);
 	List<Reservation> getReservationsByPassengerId(String id);
 	List<Reservation> getReservationsByAgentId(String id);	
+	void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger);
+	
 }
