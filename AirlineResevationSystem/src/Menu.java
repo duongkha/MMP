@@ -74,20 +74,23 @@ public class Menu {
 	public void on_MenuSelected(int commandIndex) {
 			switch(commandIndex) {
 			case 1://view airports
-				 System.out.println("List of airports:");  
+				 System.out.println("===================LIST OF AIRPORTS=========================");  
 				 var airports = DataService.getInstance().getAirports();
 				 for(var item:airports)
 					 System.out.println(item.toString());
+				 System.out.println("=============================================================");  
 				break;
 			case 2://view airline by departure airport code
 				 System.out.print("Enter Airport Code:");
 				 String code = readCommandString(); //CID
-				 System.out.println(code);
+				// System.out.println(code);
 				 if(!code.isEmpty()) {
+					 System.out.println("===================LIST OF AIRLINES=========================");  
 					List<Airline> airlines = DataService.getInstance().getAirlinesDepartFrom(code);
 					for(Airline airline:airlines) {
 						System.out.println(airline.toString());
-					}					 
+					}	
+					 System.out.println("=============================================================");  
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
