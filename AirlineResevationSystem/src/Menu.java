@@ -94,7 +94,13 @@ public class Menu {
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
-				System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
+				System.out.println("===================LIST OF FLIGHTS=========================");  
+				var flights =  DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4));
+				for(var flight:flights) {
+					System.out.println(flight);
+				}
+				
+				System.out.println("=============================================================");  
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger

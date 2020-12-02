@@ -50,11 +50,11 @@ public class Flight {
 	}
 	@Override
 	   public String toString() {
-	        return ("id: " + this.flightId +
-	        			",departure time: " + this.departureTime +
-	                    " ,departure airport: "+ this.departureAirport +
-	                    ", arrival time: " + this.arrivalTime + 
-	                    ", arrival airport: " + this.arrivalAirport
+	        return ("ID: " + this.flightId +
+	        			"\tDEPARTURE TIME: " + this.departureTime +
+	                    " \tDEPARTURE AIRPORT: "+ this.departureAirport +
+	                    "\tARRIVAL TIME: " + this.arrivalTime + 
+	                    "\tARRIVAL AIRPORT: " + this.arrivalAirport
 	                    );
 	   }
 	public void addFlightInstance(FlightInstance instance) {
