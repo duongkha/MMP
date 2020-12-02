@@ -4,7 +4,7 @@ import java.util.List;
 
 import service.Repository;
 
-public class Reservation {
+public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;
 	List<FlightInstance> flightInstance;
 	String reservationId;
@@ -35,19 +35,26 @@ public class Reservation {
 	public String getAgentId() {
 		return agentId;
 	}
-
+	@Override
+	public int compareTo(Reservation reservation) {
+		if(reservation != null) {
+			if(reservation.getReservationId().equalsIgnoreCase(reservationId)) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 	@Override
 	   public String toString() {
 		//TODO: well-formed printing
-		String s = "============================================================================"+
+		String s = "=============================SERVERVATION INFORMATION================================="+
 					"\nSERVERVATION ID: " + this.reservationId +
 					"\nAGENT ID:" + this.agentId +
 					"\nPASSENGER INFORMATION:"+
 					"\nNAME: " + this.passenger.getFirstName() + "," + this.passenger.getLastName()+
 					"\nDOB: " + this.passenger.getDOB().toString() +
-					"\nEMAIL: " + this.passenger.getEmailAddress() +
-					"\n FLIGHT INFORMATION:";
-		s += "\n============================================================";
+					"\nEMAIL: " + this.passenger.getEmailAddress();
+		s += "\n===========================FLIGHT INFORMATION=================================";
 		for(var instance:this.flightInstance) {
 			String s1 ="\nFLIGHT ID: " + instance.getFlight().getFlightId() + 
 					"\t\tFLIGHT DATE:" + instance.getDate().toString() + 
@@ -56,14 +63,21 @@ public class Reservation {
 					"\t\tDEPARTURE TIME: " + instance.getFlight().getDepartureTime().toString() + 
 					"\t\tARRIVAL TIME: " + instance.getFlight().getArrivalTime().toString();
 			s += s1;
-		}
-		if(this.tickets.size() == 0)
-			s += "\nNO TICKET ISSUED";
-		else {
-			for(var item:this.tickets){
-				s += "\nTICKET NUMBER: " + item.getTicketNumber();
+			if(this.tickets.size() > 0){
+				boolean found = false;
+				for(var ticket:this.tickets) {
+					if(ticket.getFlightInstance().compareTo(instance) > 0){
+						s += "\nTICKET NUMBER: " + ticket.getTicketNumber();
+						found = true;
+						break;
+					}
+				}
+				if(!found)
+					s += "\nNO TICKET ISSUED";
 			}
+			s += "\n";
 		}
+		
 		s += "\n==================================================================================";
 		return s;
 //	        return ("agent id: " + this.agentId +
