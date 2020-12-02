@@ -38,11 +38,39 @@ public class Reservation {
 
 	@Override
 	   public String toString() {
-	        return ("agent id: " + this.agentId +
-	        			",Flight Instances: " + this.flightInstance.toString() +
-	                    " ,Passenger: "+ this.passenger.toString() +
-	                    ", Tickets: " + this.tickets.toString()
-	                    );
+		//TODO: well-formed printing
+		String s = "============================================================================"+
+					"\nSERVERVATION ID: " + this.reservationId +
+					"\nAGENT ID:" + this.agentId +
+					"\nPASSENGER INFORMATION:"+
+					"\nNAME: " + this.passenger.getFirstName() + "," + this.passenger.getLastName()+
+					"\nDOB: " + this.passenger.getDOB().toString() +
+					"\nEMAIL: " + this.passenger.getEmailAddress() +
+					"\n FLIGHT INFORMATION:";
+		s += "\n============================================================";
+		for(var instance:this.flightInstance) {
+			String s1 ="\nFLIGHT ID: " + instance.getFlight().getFlightId() + 
+					"\t\tFLIGHT DATE:" + instance.getDate().toString() + 
+					"\nFROM: " + instance.getFlight().getDepartureAirport().getCode() + 
+					"\tTO: " + instance.getFlight().getArrivalAirport().getCode() +
+					"\t\tDEPARTURE TIME: " + instance.getFlight().getDepartureTime().toString() + 
+					"\t\tARRIVAL TIME: " + instance.getFlight().getArrivalTime().toString();
+			s += s1;
+		}
+		if(this.tickets.size() == 0)
+			s += "\nNO TICKET ISSUED";
+		else {
+			for(var item:this.tickets){
+				s += "\nTICKET NUMBER: " + item.getTicketNumber();
+			}
+		}
+		s += "\n==================================================================================";
+		return s;
+//	        return ("agent id: " + this.agentId +
+//	        			",Flight Instances: " + this.flightInstance.toString() +
+//	                    " ,Passenger: "+ this.passenger.toString() +
+//	                    ", Tickets: " + this.tickets.toString()
+//	                    );
 	   }
 	
 	public boolean confirmReservation() {
