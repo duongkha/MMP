@@ -36,6 +36,9 @@ public class Reservation implements Comparable<Reservation>{
 	public String getAgentId() {
 		return agentId;
 	}
+	public Passenger getPassenger() {
+		return passenger;
+	}
 	@Override
 	public int compareTo(Reservation reservation) {
 		if(reservation != null) {

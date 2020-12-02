@@ -220,20 +220,21 @@ public class DataService implements Repository{
 	}
 	
 	public List<Reservation> getReservationsByPassengerId(String id){
-		var passenger = DataService.getInstance().getPassengerById(id);
-		if(passenger != null) {
-			return passenger.getReservations();
+		List<Reservation> list = new ArrayList<Reservation>();
+		for(var item:this.reservations) {
+			if(item.getPassenger().getId().equalsIgnoreCase(id))
+				list.add(item);
 		}
-		return null;
+		return list;
 	}
 	
 	public List<Reservation> getReservationsByAgentId(String id){
-		var agent = DataService.getInstance().getAgentById(id);
-		if(agent != null)
-		{
-			return agent.getReservations();
+		List<Reservation> list = new ArrayList<Reservation>();
+		for(var item:this.reservations) {
+			if(item.getAgentId().equalsIgnoreCase(id))
+				list.add(item);
 		}
-		return null;
+		return list;
 	}
 	public boolean confirmReservationByPassenger(String reservationId,String passengerId) {
 		var reservations = DataService.getInstance().getReservationsByPassengerId(passengerId);
