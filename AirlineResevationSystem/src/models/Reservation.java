@@ -7,15 +7,15 @@ import service.Repository;
 
 public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;
-	List<FlightInstance> flightInstance;
+	List<FlightInstance> flightInstances;
 	String reservationId;
 	String agentId;
 	Passenger passenger;
 
-	public Reservation(String reservationId, List<FlightInstance> flightInstance, String agentId, Passenger passenger) {
+	public Reservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
 		super();
 		this.reservationId = reservationId;
-		this.flightInstance = flightInstance;
+		this.flightInstances = flightInstances;
 		this.agentId = agentId;
 		this.passenger = passenger;
 		this.tickets = new ArrayList<Ticket>();
@@ -25,8 +25,8 @@ public class Reservation implements Comparable<Reservation>{
 		return tickets;
 	}
 
-	public List<FlightInstance> getFlightInstance() {
-		return flightInstance;
+	public List<FlightInstance> getFlightInstances() {
+		return flightInstances;
 	}
 	
 	public String getReservationId() {
@@ -56,7 +56,7 @@ public class Reservation implements Comparable<Reservation>{
 					"\nDOB: " + this.passenger.getDOB().toString() +
 					"\nEMAIL: " + this.passenger.getEmailAddress();
 		s += "\n===========================FLIGHT INFORMATION=================================";
-		for(var instance:this.flightInstance) {
+		for(var instance:this.flightInstances) {
 			String s1 ="\nFLIGHT ID: " + instance.getFlight().getFlightId() + 
 					"\t\tFLIGHT DATE:" + instance.getDate().toString() + 
 					"\nFROM: " + instance.getFlight().getDepartureAirport().getCode() + 
@@ -90,8 +90,8 @@ public class Reservation implements Comparable<Reservation>{
 	
 	public boolean confirmReservation() {
 		//create new tickets
-		if(this.flightInstance.size() > 0) {
-			for(var instance:flightInstance) {
+		if(this.flightInstances.size() > 0) {
+			for(var instance:flightInstances) {
 				var ticket = new Ticket(instance,this);
 				instance.addTicket(ticket);
 				this.tickets.add(ticket);
