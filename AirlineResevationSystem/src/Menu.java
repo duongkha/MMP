@@ -99,6 +99,7 @@ public class Menu {
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
+<<<<<<< .merge_file_fWLNIQ
 				//System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
 				//Lisa did for testing reservation, you can update,Dalai!
 				System.out.print("Input Departure Airport Code:");
@@ -116,6 +117,15 @@ public class Menu {
 					System.out.println(flight.toString() );
 				}
 				
+=======
+				System.out.println("===================LIST OF FLIGHTS=========================");  
+				var flights =  DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4));
+				for(var flight:flights) {
+					System.out.println(flight);
+				}
+				
+				System.out.println("=============================================================");  
+>>>>>>> .merge_file_dYBuHy
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger

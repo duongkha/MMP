@@ -2,9 +2,12 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< .merge_file_aQVQpB
 import service.DataService;
 import service.Repository;
 import utility.Helper;
+=======
+>>>>>>> .merge_file_rvrxD7
 
 public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;
