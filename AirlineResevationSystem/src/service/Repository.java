@@ -24,7 +24,8 @@ public interface Repository {
 	List<Reservation> getReservations(Passenger passenger);
 	boolean confirmReservationByPassenger(String reservationId,String passengerId);
 	boolean confirmReservationByAgent(String reservationId,String agentId);
-	boolean deleteReservation(String reservationId);
+	boolean cancelReservationByPassenger(String reservationId,String passengerId);
+	boolean cancelReservationByAgent(String reservationId,String agentId);
 	List<Airline> getAirlinesDepartFrom(String airportCode);
 	List<Reservation> getReservationsByPassengerId(String id);
 	List<Reservation> getReservationsByAgentId(String id);	

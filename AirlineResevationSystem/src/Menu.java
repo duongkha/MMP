@@ -1,4 +1,8 @@
+import java.util.List;
+
+import models.Airline;
 import service.DataService;
+import service.Repository;
 public class Menu {
 	private final String MENU_STRING_1 = "\nPLEASE SELECT:"+
 						"\n1.View list of airports" + 
@@ -77,12 +81,16 @@ public class Menu {
 				break;
 			case 2://view airline by departure airport code
 				 System.out.print("Enter Airport Code:");
-				 String code = readCommandString();
+				 String code = readCommandString(); //CID
+				 System.out.println(code);
 				 if(!code.isEmpty()) {
-					 
+					List<Airline> airlines = DataService.getInstance().getAirlinesDepartFrom(code);
+					for(Airline airline:airlines) {
+						System.out.println(airline.toString());
+					}					 
 				 }
 				break;
-			case 3://view flights between departure and destination with a date
+			case 3://view flights between departure and destination with a date ->Dalai
 				break;
 			case 4://view own reservations
 				if(userType == 1){//passenger
@@ -104,11 +112,32 @@ public class Menu {
 					}
 				}
 				break;
-			case 5:
+			case 5://View details of a reservation ->Anuj: Input is reservatioId ->look at case 8 for reference
 				break;
-			case 6:
+			case 6://Make a reservation ->Sa
 				break;
-			case 7:
+			case 7://Cancel a reservation
+				System.out.println("Enter Reservation Number:");
+				String reservationId = readCommandString();
+				if(!reservationId.isEmpty()) {
+					if(userType == 1) {
+						var result = DataService.getInstance().cancelReservationByPassenger(reservationId, userId);
+						if(result) {
+							System.out.println("Reservation " + reservationId +  " is cancelled.");
+						}
+						else
+							System.out.println("ERROR: Reservation Not Found.");
+					}
+					else
+					if(userType == 2){//agent
+						var result = DataService.getInstance().confirmReservationByAgent(reservationId, userId);
+						if(result) {
+							System.out.println("Reservation " + reservationId +  " is cancelled.");
+						}
+						else
+							System.out.println("ERROR: Reservation Not Found.");
+					}
+				}
 				break;
 			case 8://confirm reservation
 				

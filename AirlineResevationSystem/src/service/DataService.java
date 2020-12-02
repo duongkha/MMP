@@ -209,9 +209,20 @@ public class DataService implements Repository{
 	}
 	
 	
-	public boolean deleteReservation(String reservationId) {
+	public boolean cancelReservationByPassenger(String reservationId,String passengerId) {
 		for(var item: this.reservations) {
-			if(item.getReservationId().equalsIgnoreCase(reservationId)) {
+			if(item.getReservationId().equalsIgnoreCase(reservationId) &&
+					item.getPassenger().getId().equalsIgnoreCase(passengerId)) {
+				this.reservations.remove(item);
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean cancelReservationByAgent(String reservationId,String agentId) {
+		for(var item: this.reservations) {
+			if(item.getReservationId().equalsIgnoreCase(reservationId) &&
+					item.getAgentId().equalsIgnoreCase(agentId)) {
 				this.reservations.remove(item);
 				return true;
 			}
