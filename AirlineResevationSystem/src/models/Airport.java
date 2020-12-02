@@ -1,12 +1,9 @@
 package models;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Airport {
 	String airportId;
 	String code;
 	String name;
-	List<Flight> flights;
 	Address address;
 	
 	public Airport(String airportId, String code, String name,Address address) {
@@ -15,7 +12,6 @@ public class Airport {
 		this.code = code;
 		this.name = name;
 		this.address = address;
-		flights = new ArrayList<Flight>();
 	}
 	public String getAirportId() {
 		return airportId;
@@ -29,14 +25,8 @@ public class Airport {
 	public Address getAddress() {
 		return address;
 	}
-	public List<Flight> getFlights(){
-		return flights;
-	}
 	 @Override
 	   public String toString() {
 	        return ("ID: " + this.airportId + "\tCODE: " + this.code + "\tNAME: "+ this.name);
 	   }
-	public void addFlight(Flight flight) {
-		this.flights.add(flight);
-	}
 }

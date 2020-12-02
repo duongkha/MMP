@@ -2,8 +2,6 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import service.DataService;
-import service.Repository;
 
 public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;

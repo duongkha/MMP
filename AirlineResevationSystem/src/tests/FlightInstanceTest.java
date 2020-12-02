@@ -15,8 +15,6 @@ import models.Airline;
 import models.Airport;
 import models.Flight;
 import models.FlightInstance;
-import models.Reservation;
-
 
 public class FlightInstanceTest {
 	private static FlightInstance flightInstance;
@@ -67,13 +65,5 @@ public class FlightInstanceTest {
 		var output = flightInstance.getPilots();
 		Assertions.assertNotNull(output);
 		Assertions.assertFalse(output.isEmpty());
-	}
-	@Test
-	public void testGetReservations() {
-		var output = flightInstance.getReservations();
-		Assertions.assertNotNull(output);
-		for(var v: output) {
-			Assertions.assertTrue(v instanceof Reservation);
-		}
 	}
 }

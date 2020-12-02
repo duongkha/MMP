@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlightInstance  implements Comparable<FlightInstance>{
-	List<Reservation> reservations;
 	Flight flight;
 	String id;
 	LocalDate date;
@@ -18,13 +17,9 @@ public class FlightInstance  implements Comparable<FlightInstance>{
 		crews = new ArrayList<String>();
 		pilots = new ArrayList<String>();
 		tickets = new ArrayList<Ticket>();
-		reservations = new ArrayList<Reservation>();
 		if(flight != null) {
 			this.flight = flight;
 		}
-	}
-	public List<Reservation> getReservations() {
-		return reservations;
 	}
 	
 	public Flight getFlight() {
@@ -56,9 +51,6 @@ public class FlightInstance  implements Comparable<FlightInstance>{
 	}
 	public void addTicket(Ticket ticket) {
 		this.tickets.add(ticket);
-	}
-	public void addReservation(Reservation reservation) {
-		this.reservations.add(reservation);
 	}
 	@Override
 	public int compareTo(FlightInstance instance) {
