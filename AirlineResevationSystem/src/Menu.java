@@ -1,4 +1,8 @@
+import java.util.List;
+
+import models.Airline;
 import service.DataService;
+import service.Repository;
 public class Menu {
 	private final String MENU_STRING_1 = "\nPLEASE SELECT:"+
 						"\n1.View list of airports" + 
@@ -77,9 +81,13 @@ public class Menu {
 				break;
 			case 2://view airline by departure airport code
 				 System.out.print("Enter Airport Code:");
-				 String code = readCommandString();
+				 String code = readCommandString(); //CID
+				 System.out.println(code);
 				 if(!code.isEmpty()) {
-					 
+					List<Airline> airlines = DataService.getInstance().getAirlinesDepartFrom(code);
+					for(Airline airline:airlines) {
+						System.out.println(airline.toString());
+					}					 
 				 }
 				break;
 			case 3://view flights between departure and destination with a date
