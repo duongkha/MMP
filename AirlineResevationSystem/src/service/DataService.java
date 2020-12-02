@@ -45,9 +45,9 @@ public class DataService implements Repository{
 	
 	private void InitAirports() {
 		airports  = new ArrayList<Airport>();
-		var address1 = new Address("1","2121 Arthur Collins Pkwy SW","IA","Cedar Rapids","52404");
+		var address1 = new Address("1","2121 Arthur Collins Pkwy SW","Cedar Rapids","IA","52404");
 		var airport1 = new Airport("111","CID","Cedar Rapids", address1);
-		var address2 = new Address("2","10000 W O'Hare Ave","IL","Chicago","60666");
+		var address2 = new Address("2","10000 W O'Hare Ave","Chicago","IL","60666");
 		var airport2 = new Airport("112","ORD","O'Hare", address2);
 		airports.add(airport1);
 		airports.add(airport2);

@@ -15,7 +15,7 @@ public class AirportTest {
 	@BeforeAll
 	public static void setUp() {
 		airport = new Airport("004", "CID", "Cedar Rapids Airport", 
-				new Address("78", "2121 Aurthur Collins Parkway SW", "Iowa", "Cedar Rapids", "52404"));
+				new Address("78", "2121 Aurthur Collins Parkway SW", "Cedar Rapids","Iowa",  "52404"));
 	}
 	@Test
 	public void testGetAirportId() {
