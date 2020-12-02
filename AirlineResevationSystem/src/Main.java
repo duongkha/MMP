@@ -18,6 +18,7 @@ public class Main {
 	
 	    if(commandIndex > -1) {
 		    var menu = new Menu(commandIndex);
+		    menu.readUserId();
 		    menu.loadMenu();
 		    System.out.print("User input:");  
 		    commandIndex = Menu.readCommandIndex();

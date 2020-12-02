@@ -7,38 +7,54 @@ public class Menu {
 						"\n1.View list of airports" + 
 						"\n2.View list of airlines flying out of an airport (search by airport three letter code)" +
 						"\n3.View list of flights between a departure and destination for a date";
-	private final String VIEW_OWN_RESERVATION = "4.View list of own reservations";	
-	private final String VIEW_AGENT_RESERVATION = "4.View list of passengers and reservations";	
+	private final String VIEW_OWN_RESERVATION = "\n4.View list of own reservations";	
+	private final String VIEW_AGENT_RESERVATION = "\n4.View list of passengers and reservations";	
 	private final String MENU_STRING_2 = "\n5.View details of a reservation"+
 											"\n6.Make a reservation"+
 											"\n7.Cancel a reservation"+
 											"\n8.Confirm and purchase a reservation.";
 	
 	private int userType;
+	private String userId;
 	public Menu(int userType) {
 		// TODO Auto-generated constructor stub
 		this.userType = userType;
+	}
+	
+	public void readUserId() {
+		String s = "";
+		switch (userType) {
+		case 1: 
+			s = "YOU ARE LOGGED IN AS PASSENGER";
+			break;
+		case 2:
+			s = "YOU ARE LOGGED IN AS AGENT";
+			break;
+//		case 3:
+//			break;
+		}
+		s += "\nEnter your Id:";
+		System.out.println(s); 
+		userId = readCommandString();
 	}
 	
 	public void loadMenu() {
 		String menu = "";
 		switch (userType) {
 		//passenger
-		case 0: {
-			menu = "YOU ARE LOGGED IN AS PASSENGER";
+		case 1: {
 			menu += MENU_STRING_1;
 			menu += VIEW_OWN_RESERVATION;
 			break;
 		}
 		//agent
-		case 1: {
-			menu = "YOU ARE LOGGED IN AS AGENT";
+		case 2: {
 			menu += MENU_STRING_1;
 			menu += VIEW_AGENT_RESERVATION;
 			break;
 		}
 		//admin
-		case 2: {
+		case 3: {
 //			menu = "You are logged in as Admin";
 //			menu += MENU_STRING_1;
 //			menu += VIEW_AGENT_RESERVATION;
@@ -65,10 +81,30 @@ public class Menu {
 			 if(!code.isEmpty()) {
 				 
 			 }
-			break;//view flights between departure and destination with a date
-		case 3:
 			break;
-		case 4:
+		case 3://view flights between departure and destination with a date
+			break;
+		case 4://view own reservations
+			if(userType == 1){//passenger
+				var passenger = Repository.getInstance().getPassengerById(userId);
+				if(passenger != null) {
+					var reservations = passenger.getReservations();
+					System.out.println("List of reservation:");  
+					for(var item:reservations)
+						System.out.println(item);
+				}
+			}
+			else
+			if(userType == 2){//agent
+				var agent = Repository.getInstance().getAgentById(userId);
+				if(agent != null)
+				{
+					var reservations = agent.getReservations();
+					System.out.println("List of reservation:");  
+					for(var item:reservations)
+						System.out.println(item);
+				}
+			}
 			break;
 		case 5:
 			break;
@@ -76,7 +112,65 @@ public class Menu {
 			break;
 		case 7:
 			break;
-		case 8:
+		case 8://confirm reservation
+			
+			System.out.println("Enter Reservation Number:");
+			String id = readCommandString();
+			if(!id.isEmpty()) {
+				if(userType == 1) {
+					boolean found = false;
+					var passenger = Repository.getInstance().getPassengerById(userId);
+					if(passenger != null) {
+						var reservations = passenger.getReservations();
+						for(var item:reservations){
+							if(item.getReservationId().equalsIgnoreCase(id)) {
+								found = true;
+								if(item.getTickets().size() == 0) {
+									boolean result = item.confirmReservation();
+									if(result) {
+										System.out.println("Reservation " + item.getReservationId() +  " purchased.");
+										break;
+									}
+								}
+								else {
+									System.out.println("Reservation purchased already.");
+									break;
+								}
+							}
+						}
+					}
+					if(!found)
+						System.out.println("ERROR: Reservation Not Found.");
+				}
+				else
+				if(userType == 2){//agent
+					var agent = Repository.getInstance().getAgentById(userId);
+					boolean found = false;
+					if(agent != null)
+					{
+						var reservations = agent.getReservations();
+						for(var item:reservations){
+							if(item.getReservationId().equalsIgnoreCase(id)) {
+								found = true;
+								if(item.getTickets().size() == 0) {
+									boolean result = item.confirmReservation();
+									if(result) {
+										System.out.println("Reservation " + item.getReservationId() +  " purchased.");
+										break;
+									}
+								}
+								else {
+									System.out.println("Reservation purchased already.");
+									break;
+								}
+							}
+						}
+					}
+					if(!found)
+						System.out.println("ERROR: Reservation Not Found.");
+				}
+			}
+			
 			break;
 		}
 		 System.out.println("Press ESC to back to MENU.");  
