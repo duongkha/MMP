@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import service.DataService;
 import service.Repository;
 
 public class Passenger {
@@ -47,7 +48,7 @@ public class Passenger {
 	}
 	
 	public List<Airport> getAirports(){
-		return Repository.getInstance().getAirports();
+		return DataService.getInstance().getAirports();
 	}
 	
 	@Override

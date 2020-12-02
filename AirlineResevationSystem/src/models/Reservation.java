@@ -2,6 +2,7 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import service.DataService;
 import service.Repository;
 
 public class Reservation implements Comparable<Reservation>{
@@ -100,7 +101,7 @@ public class Reservation implements Comparable<Reservation>{
 		return false;
 	}
 	public boolean cancel() {
-		return Repository.getInstance().deleteReservation(this.reservationId);
+		return DataService.getInstance().deleteReservation(this.reservationId);
 	}
 	
 	public boolean makeReservation() {
