@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import models.Passenger;
 
+
 public class PassengerTest {
-	private Passenger passenger;
+	private static Passenger passenger;
 	
 	@BeforeAll
-	public void setUp() {
-		this.passenger = new Passenger("065", "John", "Doe", LocalDate.of(1990, 10, 10), "john@doe.com");
+	public static void setUp() {
+		passenger = new Passenger("065", "John", "Doe", LocalDate.of(1990, 10, 10), "john@doe.com");
 	}
 	
 	@Test
