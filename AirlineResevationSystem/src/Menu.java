@@ -116,12 +116,25 @@ public class Menu {
 				}
 				break;
 			case 5://View details of a reservation ->Anuj: Input is reservatioId ->look at case 8 for reference
+				System.out.println("Enter Reservation Number:");
+				String reservationId = readCommandString();
+				if(!reservationId.isEmpty()) {
+					if(userType == 1) {
+						var reservation = DataService.getInstance().getReservationIdAndPassenger(reservationId, userId);
+						System.out.println(reservation);
+					}
+					else
+					if(userType == 2){//agent
+						var reservation = DataService.getInstance().getReservationIdAndAgent(reservationId,userId);
+						System.out.println(reservation);
+					}
+				}
 				break;
 			case 6://Make a reservation ->Sa
 				break;
 			case 7://Cancel a reservation
 				System.out.println("Enter Reservation Number:");
-				String reservationId = readCommandString();
+				reservationId = readCommandString();
 				if(!reservationId.isEmpty()) {
 					if(userType == 1) {
 						var result = DataService.getInstance().cancelReservationByPassenger(reservationId, userId);
