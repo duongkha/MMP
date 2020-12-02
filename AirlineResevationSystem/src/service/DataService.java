@@ -383,7 +383,7 @@ public class DataService implements Repository{
 	
 	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception
 	{
-		String reservationId = Helper.generateTicketNumber();
+		
 		if(flightInstances == null || flightInstances.isEmpty()) {
 			throw new Exception("No flight instances found!");	
 		}		
@@ -393,6 +393,9 @@ public class DataService implements Repository{
 		if(!checkAvailableSeats(flightInstances)) {
 			throw new Exception("No available seats!");	
 		}
+		
+		String reservationId = Helper.generateReservationId();
+		
 		Reservation reservation =  new Reservation(reservationId, flightInstances, agentId, passenger);	
 		reservations.add(reservation);
 		return reservation;
