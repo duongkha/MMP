@@ -12,6 +12,7 @@ import models.Flight;
 import models.FlightInstance;
 import models.Passenger;
 import models.Reservation;
+import models.Ticket;
 
 public class DataService implements Repository{
 
@@ -281,11 +282,13 @@ public class DataService implements Repository{
 				if(item.getReservationId().equalsIgnoreCase(reservationId)) {
 					//found = true;
 					if(item.getTickets().size() == 0) {
-						boolean result = item.confirmReservation();
-						if(result) {
+						if(item.getFlightInstances().size() > 0) {
+							for(var instance:item.getFlightInstances()) {
+								var ticket = new Ticket(instance,item);
+								instance.addTicket(ticket);
+								item.getTickets().add(ticket);
+							}
 							return true;
-//							System.out.println("Reservation " + item.getReservationId() +  " purchased.");
-//							break;
 						}
 					}
 //					else {
@@ -307,7 +310,14 @@ public class DataService implements Repository{
 			for(var item:reservations){
 				if(item.getReservationId().equalsIgnoreCase(reservationId)) {
 					if(item.getTickets().size() == 0) {
-						return item.confirmReservation();
+						if(item.getFlightInstances().size() > 0) {
+							for(var instance:item.getFlightInstances()) {
+								var ticket = new Ticket(instance,item);
+								instance.addTicket(ticket);
+								item.getTickets().add(ticket);
+							}
+							return true;
+						}
 					}
 				}
 			}

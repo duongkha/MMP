@@ -91,18 +91,6 @@ public class Reservation implements Comparable<Reservation>{
 //	                    );
 	   }
 	
-	public boolean confirmReservation() {
-		//create new tickets
-		if(this.flightInstances.size() > 0) {
-			for(var instance:flightInstances) {
-				var ticket = new Ticket(instance,this);
-				instance.addTicket(ticket);
-				this.tickets.add(ticket);
-			}
-			return true;
-		}
-		return false;
-	}
 	
 	public static Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
 		String reservationId = Helper.generateTicketNumber();

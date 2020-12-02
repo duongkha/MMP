@@ -126,6 +126,7 @@ public class Menu {
 					var reservations = DataService.getInstance().getReservationsByPassengerId(userId);
 					if(reservations != null) {
 						System.out.println("===================LIST OF RESERVATIONS=========================");  
+						System.out.println("\nRESERVATION COUNT: " + reservations.size());
 						for(var item:reservations)
 							System.out.println(item);
 						System.out.println("================================================================="); 
@@ -137,6 +138,7 @@ public class Menu {
 					if(reservations != null)
 					{
 						System.out.println("===================LIST OF RESERVATIONS=========================");  
+						System.out.println("RESERVATION COUNT: " + reservations.size());
 						for(var item:reservations)
 							System.out.println(item);
 						System.out.println("================================================================="); 
