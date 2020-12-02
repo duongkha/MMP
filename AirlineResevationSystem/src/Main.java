@@ -20,9 +20,7 @@ public class Main {
 		    var menu = new Menu(commandIndex);
 		    menu.readUserId();
 		    menu.loadMenu();
-		    System.out.print("User input:");  
-		    commandIndex = Menu.readCommandIndex();
-		    menu.on_MenuSelected(commandIndex);
+		
 	    }
 	    else {
 	    	 System.out.println("User not found");  

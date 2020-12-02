@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlightInstance {
+public class FlightInstance  implements Comparable<FlightInstance>{
 	List<Reservation> reservations;
 	Flight flight;
 	String id;
@@ -59,6 +59,15 @@ public class FlightInstance {
 	}
 	public void addReservation(Reservation reservation) {
 		this.reservations.add(reservation);
+	}
+	@Override
+	public int compareTo(FlightInstance instance) {
+		if(instance != null) {
+			if(instance.getId().equalsIgnoreCase(this.getId())) {
+				return 1;
+			}
+		}
+		return 0;
 	}
 	@Override
 	   public String toString() {
