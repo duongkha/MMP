@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import models.Passenger;
+import models.Reservation;
 
 
 public class PassengerTest {
@@ -59,5 +60,8 @@ public class PassengerTest {
 	public void testGetReservations() {
 		var output = passenger.getReservations();
 		Assertions.assertNotNull(output);
+		for(var v: output) {
+			Assertions.assertTrue(v instanceof Reservation);
+		}
 	}
 }
