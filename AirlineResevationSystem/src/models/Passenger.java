@@ -46,12 +46,12 @@ public class Passenger {
 		this.reservations.add(reservation);
 	}
 	
-	public List<Airport> getAirport(){
+	public List<Airport> getAirports(){
 		return Repository.getInstance().getAirports();
 	}
 	
 	@Override
-    public String toString() {
+   public String toString() {
         return ("id: " + this.Id +
         			",Full Name: " + this.firstName + " " + this.lastName +
                     ", DOB: " + this.DOB + 
