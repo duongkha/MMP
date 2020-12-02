@@ -1,4 +1,6 @@
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
+
 
 import service.Repository;
 
@@ -64,116 +66,121 @@ public class Menu {
 			throw new IllegalArgumentException("Unexpected value: " + userType);
 		}
 		menu  += MENU_STRING_2;
-		 System.out.println(menu);  
+		System.out.println(menu);  
+	    System.out.print("User input:");  
+	    int commandIndex = Menu.readCommandIndex();
+	    on_MenuSelected(commandIndex);
 	}
 	
 	public void on_MenuSelected(int commandIndex) {
-		switch(commandIndex) {
-		case 1://view airports
-			 System.out.println("List of airports:");  
-			 var airports = Repository.getInstance().getAirports();
-			 for(var item:airports)
-				 System.out.println(item.toString());
-			break;
-		case 2://view airline by departure airport code
-			 System.out.print("Enter Airport Code:");
-			 String code = readCommandString();
-			 if(!code.isEmpty()) {
-				 
-			 }
-			break;
-		case 3://view flights between departure and destination with a date
-			break;
-		case 4://view own reservations
-			if(userType == 1){//passenger
-				var passenger = Repository.getInstance().getPassengerById(userId);
-				if(passenger != null) {
-					var reservations = passenger.getReservations();
-					System.out.println("List of reservation:");  
-					for(var item:reservations)
-						System.out.println(item);
-				}
-			}
-			else
-			if(userType == 2){//agent
-				var agent = Repository.getInstance().getAgentById(userId);
-				if(agent != null)
-				{
-					var reservations = agent.getReservations();
-					System.out.println("List of reservation:");  
-					for(var item:reservations)
-						System.out.println(item);
-				}
-			}
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		case 7:
-			break;
-		case 8://confirm reservation
-			
-			System.out.println("Enter Reservation Number:");
-			String id = readCommandString();
-			if(!id.isEmpty()) {
-				if(userType == 1) {
-					boolean found = false;
+			switch(commandIndex) {
+			case 1://view airports
+				 System.out.println("List of airports:");  
+				 var airports = Repository.getInstance().getAirports();
+				 for(var item:airports)
+					 System.out.println(item.toString());
+				break;
+			case 2://view airline by departure airport code
+				 System.out.print("Enter Airport Code:");
+				 String code = readCommandString();
+				 if(!code.isEmpty()) {
+					 
+				 }
+				break;
+			case 3://view flights between departure and destination with a date
+				break;
+			case 4://view own reservations
+				if(userType == 1){//passenger
 					var passenger = Repository.getInstance().getPassengerById(userId);
 					if(passenger != null) {
 						var reservations = passenger.getReservations();
-						for(var item:reservations){
-							if(item.getReservationId().equalsIgnoreCase(id)) {
-								found = true;
-								if(item.getTickets().size() == 0) {
-									boolean result = item.confirmReservation();
-									if(result) {
-										System.out.println("Reservation " + item.getReservationId() +  " purchased.");
-										break;
-									}
-								}
-								else {
-									System.out.println("Reservation purchased already.");
-									break;
-								}
-							}
-						}
+						System.out.println("List of reservation:");  
+						for(var item:reservations)
+							System.out.println(item);
 					}
-					if(!found)
-						System.out.println("ERROR: Reservation Not Found.");
 				}
 				else
 				if(userType == 2){//agent
 					var agent = Repository.getInstance().getAgentById(userId);
-					boolean found = false;
 					if(agent != null)
 					{
 						var reservations = agent.getReservations();
-						for(var item:reservations){
-							if(item.getReservationId().equalsIgnoreCase(id)) {
-								found = true;
-								if(item.getTickets().size() == 0) {
-									boolean result = item.confirmReservation();
-									if(result) {
-										System.out.println("Reservation " + item.getReservationId() +  " purchased.");
+						System.out.println("List of reservation:");  
+						for(var item:reservations)
+							System.out.println(item);
+					}
+				}
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			case 7:
+				break;
+			case 8://confirm reservation
+				
+				System.out.println("Enter Reservation Number:");
+				String id = readCommandString();
+				if(!id.isEmpty()) {
+					if(userType == 1) {
+						boolean found = false;
+						var passenger = Repository.getInstance().getPassengerById(userId);
+						if(passenger != null) {
+							var reservations = passenger.getReservations();
+							for(var item:reservations){
+								if(item.getReservationId().equalsIgnoreCase(id)) {
+									found = true;
+									if(item.getTickets().size() == 0) {
+										boolean result = item.confirmReservation();
+										if(result) {
+											System.out.println("Reservation " + item.getReservationId() +  " purchased.");
+											break;
+										}
+									}
+									else {
+										System.out.println("Reservation purchased already.");
 										break;
 									}
 								}
-								else {
-									System.out.println("Reservation purchased already.");
-									break;
+							}
+						}
+						if(!found)
+							System.out.println("ERROR: Reservation Not Found.");
+					}
+					else
+					if(userType == 2){//agent
+						var agent = Repository.getInstance().getAgentById(userId);
+						boolean found = false;
+						if(agent != null)
+						{
+							var reservations = agent.getReservations();
+							for(var item:reservations){
+								if(item.getReservationId().equalsIgnoreCase(id)) {
+									found = true;
+									if(item.getTickets().size() == 0) {
+										boolean result = item.confirmReservation();
+										if(result) {
+											System.out.println("Reservation " + item.getReservationId() +  " purchased.");
+											break;
+										}
+									}
+									else {
+										System.out.println("Reservation purchased already.");
+										break;
+									}
 								}
 							}
 						}
+						if(!found)
+							System.out.println("ERROR: Reservation Not Found.");
 					}
-					if(!found)
-						System.out.println("ERROR: Reservation Not Found.");
 				}
+				
+				break;
 			}
-			
-			break;
-		}
-		 System.out.println("Press ESC to back to MENU.");  
+			System.out.println("Press ENTER to CONTINUE.");  
+			readCommandString();
+			loadMenu();
 	}
 	public static int readCommandIndex() {
 		String input = Main.scanner.nextLine();  

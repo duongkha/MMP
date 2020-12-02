@@ -1,16 +1,2 @@
-/Address.class
-/Agent.class
-/Airline.class
-/Airport.class
-/Flight.class
-/FlightInstance.class
-/Helper.class
-/Main.class
-/Passenger.class
-/Repository.class
-/Reservation.class
-/Ticket.class
+/tests/
 /models/
-/service/
-/utility/
-/Menu.class

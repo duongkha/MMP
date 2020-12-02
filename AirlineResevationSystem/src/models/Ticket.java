@@ -31,6 +31,12 @@ public class Ticket {
 	public String getTicketNumber() {
 		return ticketNumber;
 	}
+	public Reservation getReservation() {
+		return reservation;
+	}
+	public FlightInstance getFlightInstance() {
+		return flightInstance;
+	}
 	@Override
 	   public String toString() {
 	        return ("id: " + this.ticketId +
