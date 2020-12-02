@@ -301,6 +301,32 @@ public class DataService implements Repository{
 		}
 		return airlinesByAirportCode;
 	}
+	public Reservation getReservationIdAndAgent(String reservationId, String agentId) {
+		var reservations = DataService.getInstance().getReservationsByAgentId(agentId);
+		
+		if(reservations != null)
+		{
+			for(var item:reservations){
+				if(item.getReservationId().equalsIgnoreCase(reservationId)) {
+					return item; 
+				}
+			}
+		}
+		return null;
+	}
+	public Reservation getReservationIdAndPassenger(String reservationId, String passengerId) {
+		var reservations = DataService.getInstance().getReservationsByPassengerId(passengerId);
+		
+		if(reservations != null)
+		{
+			for(var item:reservations){
+				if(item.getReservationId().equalsIgnoreCase(reservationId)) {
+					return item; 
+				}
+			}
+		}
+		return null;
+	}
 	
 	public void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
 		try {

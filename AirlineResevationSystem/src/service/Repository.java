@@ -30,5 +30,7 @@ public interface Repository {
 	List<Reservation> getReservationsByPassengerId(String id);
 	List<Reservation> getReservationsByAgentId(String id);	
 	void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger);
+	Reservation getReservationIdAndAgent(String reservationId, String agentId);
+	Reservation getReservationIdAndPassenger(String reservationId, String passengerId);
 	
 }

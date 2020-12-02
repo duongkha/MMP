@@ -74,20 +74,23 @@ public class Menu {
 	public void on_MenuSelected(int commandIndex) {
 			switch(commandIndex) {
 			case 1://view airports
-				 System.out.println("List of airports:");  
+				 System.out.println("===================LIST OF AIRPORTS=========================");  
 				 var airports = DataService.getInstance().getAirports();
 				 for(var item:airports)
 					 System.out.println(item.toString());
+				 System.out.println("=============================================================");  
 				break;
 			case 2://view airline by departure airport code
 				 System.out.print("Enter Airport Code:");
 				 String code = readCommandString(); //CID
-				 System.out.println(code);
+				// System.out.println(code);
 				 if(!code.isEmpty()) {
+					 System.out.println("===================LIST OF AIRLINES=========================");  
 					List<Airline> airlines = DataService.getInstance().getAirlinesDepartFrom(code);
 					for(Airline airline:airlines) {
 						System.out.println(airline.toString());
-					}					 
+					}	
+					 System.out.println("=============================================================");  
 				 }
 				break;
 			case 3://view flights between departure and destination with a date ->Dalai
@@ -113,12 +116,25 @@ public class Menu {
 				}
 				break;
 			case 5://View details of a reservation ->Anuj: Input is reservatioId ->look at case 8 for reference
+				System.out.println("Enter Reservation Number:");
+				String reservationId = readCommandString();
+				if(!reservationId.isEmpty()) {
+					if(userType == 1) {
+						var reservation = DataService.getInstance().getReservationIdAndPassenger(reservationId, userId);
+						System.out.println(reservation);
+					}
+					else
+					if(userType == 2){//agent
+						var reservation = DataService.getInstance().getReservationIdAndAgent(reservationId,userId);
+						System.out.println(reservation);
+					}
+				}
 				break;
 			case 6://Make a reservation ->Sa
 				break;
 			case 7://Cancel a reservation
 				System.out.println("Enter Reservation Number:");
-				String reservationId = readCommandString();
+				reservationId = readCommandString();
 				if(!reservationId.isEmpty()) {
 					if(userType == 1) {
 						var result = DataService.getInstance().cancelReservationByPassenger(reservationId, userId);
