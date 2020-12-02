@@ -3,13 +3,12 @@ package tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+
 import models.Agent;
 import models.Airport;
 import models.Passenger;
 import models.Reservation;
-import service.Repository;
-
-import org.junit.jupiter.api.BeforeAll;
 
 public class AgentTest {
 	private static Agent agent;
