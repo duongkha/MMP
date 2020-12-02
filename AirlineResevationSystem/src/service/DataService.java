@@ -365,11 +365,33 @@ public class DataService implements Repository{
 		return null;
 	}
 
-	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger)
+	public boolean checkAvailableSeats(List<FlightInstance> flightInstances) {
+		for(FlightInstance flightInst:flightInstances) {
+			int capacity = flightInst.getFlight().getCapacity();
+			int count = 0;
+			for(Reservation res: reservations) {
+				if(res.getFlightInstances().contains(flightInst))
+					count += 1;
+			}
+			if(count >= capacity)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception
 	{
 		String reservationId = Helper.generateTicketNumber();
-		if(flightInstances == null || flightInstances.isEmpty() || passenger == null) {
-			return null;	
+		if(flightInstances == null || flightInstances.isEmpty()) {
+			throw new Exception("No flight instances found!");	
+		}		
+		if(passenger == null) {
+			throw new Exception("Passenger not found!");	
+		}
+		if(!checkAvailableSeats(flightInstances)) {
+			throw new Exception("No available seats!");	
 		}
 		Reservation reservation =  new Reservation(reservationId, flightInstances, agentId, passenger);	
 		reservations.add(reservation);

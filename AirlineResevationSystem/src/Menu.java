@@ -193,26 +193,23 @@ public class Menu {
 					}
 					break;						
 				}
-				
-				Reservation reservation;
+
 				if(userType == 1) {
-					reservation = DataService.getInstance().makeReservation(flightInstances, null, passenger);
-					if(reservation != null) {
+					try {
+						Reservation reservation = DataService.getInstance().makeReservation(flightInstances, null, passenger);	
 						System.out.println(reservation.toString());
 					}
-					else
-					{
-						System.out.println("Cannot create a reservation due to no flight instances or no passengers");
-					}					
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}								
 				}
 				else if (userType == 2) {
-					reservation = DataService.getInstance().makeReservation(flightInstances, userId, passenger);
-					if(reservation != null) {
+					try {
+						Reservation reservation = DataService.getInstance().makeReservation(flightInstances, userId, passenger);	
 						System.out.println(reservation.toString());
 					}
-					else
-					{
-						System.out.println("Cannot create a reservation due to no flight instances or no passengers");
+					catch (Exception e) {
+						System.out.println(e.getMessage());
 					}	
 				}
 				
