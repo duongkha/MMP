@@ -3,7 +3,6 @@ import java.util.List;
 
 import models.Airline;
 import service.DataService;
-import service.Repository;
 public class Menu {
 	private final String MENU_STRING_1 = "\nPLEASE SELECT:"+
 						"\n1.View list of airports" + 
@@ -101,9 +100,10 @@ public class Menu {
 				if(userType == 1){//passenger
 					var reservations = DataService.getInstance().getReservationsByPassengerId(userId);
 					if(reservations != null) {
-						System.out.println("List of reservation:");  
+						System.out.println("===================LIST OF RESERVATIONS=========================");  
 						for(var item:reservations)
 							System.out.println(item);
+						System.out.println("================================================================="); 
 					}
 				}
 				else
@@ -111,9 +111,10 @@ public class Menu {
 					var reservations = DataService.getInstance().getReservationsByAgentId(userId);
 					if(reservations != null)
 					{
-						System.out.println("List of reservation:");  
+						System.out.println("===================LIST OF RESERVATIONS=========================");  
 						for(var item:reservations)
 							System.out.println(item);
+						System.out.println("================================================================="); 
 					}
 				}
 				break;
@@ -158,7 +159,6 @@ public class Menu {
 				}
 				break;
 			case 8://confirm reservation
-				
 				System.out.println("Enter Reservation Number:");
 				String id = readCommandString();
 				if(!id.isEmpty()) {
