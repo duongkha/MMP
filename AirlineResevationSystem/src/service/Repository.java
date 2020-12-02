@@ -13,7 +13,7 @@ import models.FlightInstance;
 import models.Passenger;
 import models.Reservation;
 
-public class Repository {
+public class Repository implements DataService{
 
 	List<Airport> airports;
 	List<Airline> airlines;
@@ -23,11 +23,11 @@ public class Repository {
 	List<Agent> agents;
 	List<Reservation> reservations;
 	
-	static Repository repository = null;
-	public static Repository getInstance(){
-		if(repository == null)
-			repository = new Repository();
-		return repository;
+	static DataService dataService = new Repository();
+	public static DataService getInstance(){
+		if(dataService == null)
+			dataService = new Repository();
+		return dataService;
 	}
 	
 	Repository() {
