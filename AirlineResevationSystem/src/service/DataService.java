@@ -277,7 +277,7 @@ public class DataService implements Repository{
 		}
 		return false;
 	}
-	/* By SaNguyen*/
+
 	
 	public List<Airline> getAirlinesDepartFrom(String airportCode){
 		List<Airline> airlinesByAirportCode = new ArrayList<Airline>();
@@ -290,5 +290,16 @@ public class DataService implements Repository{
 		}
 		return airlinesByAirportCode;
 	}
+	
+	public void makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
+		try {
+			Reservation reservation = Reservation.makeReservation(reservationId, flightInstances, agentId, passenger);
+			reservations.add(reservation);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
 }
 

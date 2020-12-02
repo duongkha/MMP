@@ -107,8 +107,16 @@ public class Reservation implements Comparable<Reservation>{
 		return DataService.getInstance().deleteReservation(this.reservationId);
 	}
 	
-	public boolean makeReservation() {
-		return false;
+	public static Reservation makeReservation(String reservationId, List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception {
+		if(flightInstances == null || flightInstances.isEmpty()) {
+			throw new Exception("Flight Intances are quired");
+		}
+		
+		if(passenger == null) {
+			throw new Exception("Passenger is quired");
+		}
+		
+		return new Reservation(reservationId, flightInstances, agentId, passenger);
 	}
 	
 }
