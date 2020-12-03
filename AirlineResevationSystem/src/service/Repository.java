@@ -30,7 +30,7 @@ public interface Repository {
 	List<Airline> getAirlinesDepartFrom(String airportCode);
 	List<Reservation> getReservationsByPassengerId(String id);
 	List<Reservation> getReservationsByAgentId(String id);	
-	Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger);
+	Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception;
 	Reservation getReservationIdAndAgent(String reservationId, String agentId);
 	Reservation getReservationIdAndPassenger(String reservationId, String passengerId);
 	List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date);

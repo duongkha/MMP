@@ -5,6 +5,10 @@ public class Helper {
 	public static String generateTicketNumber() {
 		return generateRandom(20);
 	}
+
+	public static String generateReservationId() {
+		return generateRandom(20);
+	}
 	
 	public static String generateRandom(int length) {
 	    Random random = new Random();

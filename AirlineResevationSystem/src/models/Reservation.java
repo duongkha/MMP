@@ -2,8 +2,6 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import utility.Helper;
-
 
 public class Reservation implements Comparable<Reservation>{
 	List<Ticket> tickets;
@@ -51,8 +49,8 @@ public class Reservation implements Comparable<Reservation>{
 	@Override
 	   public String toString() {
 		//TODO: well-formed printing
-		String s = "=============================SERVERVATION INFORMATION================================="+
-					"\nSERVERVATION ID: " + this.reservationId +
+		String s = "=============================RESEVERVATION INFORMATION================================="+
+					"\nRESEVERVATION ID: " + this.reservationId +
 					"\nAGENT ID:" + this.agentId +
 					"\nPASSENGER INFORMATION:"+
 					"\nNAME: " + this.passenger.getFirstName() + "," + this.passenger.getLastName()+
@@ -62,6 +60,7 @@ public class Reservation implements Comparable<Reservation>{
 		for(var instance:this.flightInstances) {
 			String s1 ="\nFLIGHT ID: " + instance.getFlight().getFlightId() + 
 					"\t\tFLIGHT DATE:" + instance.getDate().toString() + 
+					"\t\tFLIGHT INSTANCE:" + instance.getId() + 
 					"\nFROM: " + instance.getFlight().getDepartureAirport().getCode() + 
 					"\tTO: " + instance.getFlight().getArrivalAirport().getCode() +
 					"\t\tDEPARTURE TIME: " + instance.getFlight().getDepartureTime().toString() + 
@@ -91,14 +90,5 @@ public class Reservation implements Comparable<Reservation>{
 //	                    );
 	   }
 	
-	
-	public static Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
-		String reservationId = Helper.generateTicketNumber();
-		if(flightInstances == null || flightInstances.isEmpty() || passenger == null) {
-			return null;	
-		}
-		return new Reservation(reservationId, flightInstances, agentId, passenger);
-			
-	}
-	
+
 }

@@ -160,7 +160,7 @@ public class Menu {
 					}
 				}
 				break;
-			case 6://Make a reservation ->Sa
+			case 6://Make a reservation 
 				List<FlightInstance> flightInstances = new ArrayList<FlightInstance>();		
 				
 				System.out.print("Enter Passenger Id:");
@@ -172,16 +172,18 @@ public class Menu {
 					System.out.print("Enter Flight Id:");
 					String flightId = readCommandString();
 					Flight flight = DataService.getInstance().getFlightById(flightId);
-					/*if(flight == null) {
-						System.out.println("Flight is not availablbe!");
-						break;
-					}*/
+					while(flight == null) {
+						System.out.println("Flight is unavailable!");
+						System.out.print("Enter Flight Id:");
+						flightId = readCommandString();
+						flight = DataService.getInstance().getFlightById(flightId);						
+					}
 					System.out.print("Enter Date:");
 					
 					String strDate = readCommandString();
 					LocalDate flightDate = LocalDate.parse(strDate);
 					FlightInstance flightInst = flight.getFlightIntanceByDate(flightDate);
-					if(flightInst !=null)
+					if(flightInst != null)
 						flightInstances.add(flightInst);
 					
 					System.out.print("Enter another Flight (Y/N):");
@@ -191,15 +193,24 @@ public class Menu {
 					}
 					break;						
 				}
-				
-				Reservation reservation;
+
 				if(userType == 1) {
-					reservation = DataService.getInstance().makeReservation(flightInstances, null, passenger);
-					System.out.println(reservation.toString());
+					try {
+						Reservation reservation = DataService.getInstance().makeReservation(flightInstances, null, passenger);	
+						System.out.println(reservation.toString());
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}								
 				}
 				else if (userType == 2) {
-					reservation = DataService.getInstance().makeReservation(flightInstances, userId, passenger);
-					System.out.println(reservation.toString());
+					try {
+						Reservation reservation = DataService.getInstance().makeReservation(flightInstances, userId, passenger);	
+						System.out.println(reservation.toString());
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}	
 				}
 				
 				break;

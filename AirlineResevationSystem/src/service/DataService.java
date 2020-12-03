@@ -13,6 +13,7 @@ import models.FlightInstance;
 import models.Passenger;
 import models.Reservation;
 import models.Ticket;
+import utility.Helper;
 
 public class DataService implements Repository{
 
@@ -364,12 +365,40 @@ public class DataService implements Repository{
 		return null;
 	}
 
-	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) {
-		Reservation reservation = Reservation.makeReservation(flightInstances, agentId, passenger);
-		if(reservation != null) {
-			reservations.add(reservation);	
-		}	
-		return reservation;		
+	public boolean checkAvailableSeats(List<FlightInstance> flightInstances) {
+		for(FlightInstance flightInst:flightInstances) {
+			int capacity = flightInst.getFlight().getCapacity();
+			int count = 0;
+			for(Reservation res: reservations) {
+				if(res.getFlightInstances().contains(flightInst))
+					count += 1;
+			}
+			if(count >= capacity)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public Reservation makeReservation(List<FlightInstance> flightInstances, String agentId, Passenger passenger) throws Exception
+	{
+		
+		if(flightInstances == null || flightInstances.isEmpty()) {
+			throw new Exception("No flight instances found!");	
+		}		
+		if(passenger == null) {
+			throw new Exception("Passenger not found!");	
+		}
+		if(!checkAvailableSeats(flightInstances)) {
+			throw new Exception("No available seats!");	
+		}
+		
+		String reservationId = Helper.generateReservationId();
+		
+		Reservation reservation =  new Reservation(reservationId, flightInstances, agentId, passenger);	
+		reservations.add(reservation);
+		return reservation;
 	}
 	
 	public List<Flight> getListOfFlights(String departureAirportCode, String arrivalAirportCode, LocalDate date){
