@@ -76,7 +76,7 @@ public class ReservationTest {
 		Assertions.assertTrue(output instanceof Passenger);
 	}
 	@Test
-	public void testConfirmReservation() {
+	public void testConfirmReservation() throws Exception {
 		Flight flight = new Flight(LocalTime.of(12, 05), 
 				LocalTime.of(13, 05), "FL980", 65,
 				new Airport("004", "CID", "Cedar Rapids Airport", 
