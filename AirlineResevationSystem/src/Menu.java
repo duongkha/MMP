@@ -98,10 +98,10 @@ public class Menu {
 					 System.out.println("=============================================================");  
 				 }
 				break;
-			case 3://view flights between departure and destination with a date ->Dalai
+			case 3://view flights between departure and destination with a date 
 
 				//System.out.println( DataService.getInstance().getListOfFlights("CID", "ORD", LocalDate.of(2020, 12, 4)));
-				//Lisa did for testing reservation, you can update,Dalai!
+				
 				System.out.print("Input Departure Airport Code:");
 				String departureAiport = readCommandString(); //CID
 				
@@ -145,7 +145,7 @@ public class Menu {
 					}
 				}
 				break;
-			case 5://View details of a reservation ->Anuj: Input is reservatioId ->look at case 8 for reference
+			case 5://View details of a reservation 
 				System.out.println("Enter Reservation Number:");
 				String reservationId = readCommandString();
 				if(!reservationId.isEmpty()) {
